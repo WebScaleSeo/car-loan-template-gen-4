@@ -1,0 +1,420 @@
+/* ===== HomeCta — Editorial Column + Stroke Typography + Orbital Motion ===== */
+
+/* ---- Section base ---- */
+.homeCta-section {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-page);
+  background-image:
+    linear-gradient(160deg, var(--bg-surface) 0%, var(--bg-page) 55%, color-mix(in srgb, var(--bg-page) 80%, var(--primary-color) 20%) 100%);
+  padding: 7rem 0 6rem;
+}
+
+/* ---- Dot-grid texture ---- */
+.homeCta-grid-texture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, var(--decorative-color) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Blend mode overlay ---- */
+.homeCta-blend-overlay {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 55%;
+  height: 120%;
+  background: linear-gradient(135deg, var(--badge-bg), color-mix(in srgb, var(--accent-color) 10%, transparent));
+  mix-blend-mode: multiply;
+  border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
+  pointer-events: none;
+  z-index: 1;
+  animation: blobShift 14s ease-in-out infinite alternate;
+}
+
+/* ---- Orbital decorative rings ---- */
+.homeCta-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border-style: dashed;
+  pointer-events: none;
+  z-index: 1;
+  animation: slowSpin 30s linear infinite;
+}
+
+.ring-outer {
+  width: 620px;
+  height: 620px;
+  border-width: 1px;
+  border-color: var(--decorative-color);
+  top: 50%;
+  left: -160px;
+  transform: translate(0, -50%);
+  animation-direction: normal;
+}
+
+.ring-inner {
+  width: 380px;
+  height: 380px;
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
+  top: 50%;
+  left: -60px;
+  transform: translate(0, -50%);
+  animation-direction: reverse;
+  animation-duration: 20s;
+}
+
+/* ---- Orbital dots riding along ring paths ---- */
+.homeCta-orbit-dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  animation: orbitDot 20s linear infinite;
+  transform-origin: center center;
+}
+
+.dot-a {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-color);
+  opacity: 0.55;
+  top: calc(50% - 310px);
+  left: calc(-160px + 310px);
+  animation-name: orbitDotA;
+  animation-duration: 30s;
+}
+
+.dot-b {
+  width: 7px;
+  height: 7px;
+  background: var(--secondary-color);
+  opacity: 0.4;
+  top: calc(50% - 190px);
+  left: calc(-60px + 190px);
+  animation-name: orbitDotB;
+  animation-duration: 20s;
+  animation-direction: reverse;
+}
+
+.dot-c {
+  width: 5px;
+  height: 5px;
+  background: var(--card-accent-border);
+  opacity: 0.7;
+  top: calc(50% + 160px);
+  left: calc(-160px + 310px - 40px);
+  animation-name: orbitDotC;
+  animation-duration: 25s;
+}
+
+/* ---- Layout container ---- */
+.homeCta-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ---- Editorial 2-column grid ---- */
+.homeCta-editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  animation: ctaFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---- Left column ---- */
+.homeCta-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.homeCta-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  background: var(--badge-bg);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 30%, transparent);
+  padding: 0.35rem 0.9rem;
+  border-radius: 2rem;
+  width: fit-content;
+  animation: ctaFadeUp 0.7s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---- Stroke / outline headline ---- */
+.homeCta-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05em;
+  margin: 0;
+  line-height: 1.0;
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Outlined stroke spans */
+.headline-stroke {
+  -webkit-text-stroke: 2px var(--primary-color);
+  color: transparent;
+  display: block;
+  animation: ctaFadeUp 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Solid filled spans */
+.headline-solid {
+  color: var(--primary-color);
+  display: block;
+  animation: ctaFadeUp 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Stroke accent — uses accent color stroke */
+.headline-stroke--accent {
+  -webkit-text-stroke-color: var(--accent-color);
+  animation-delay: 0.4s;
+}
+
+/* ---- Right column ---- */
+.homeCta-right-col {
+  display: flex;
+  flex-direction: column;
+  animation: ctaFadeUp 0.9s 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---- Content card ---- */
+.homeCta-content-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  padding: 2.5rem 2.5rem 2rem;
+  box-shadow: 0 20px 60px var(--shadow-color), 0 4px 16px var(--card-glow);
+  overflow: hidden;
+}
+
+.homeCta-content-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--bg-surface) 60%, var(--badge-bg) 100%);
+  z-index: 0;
+}
+
+.homeCta-content-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Colored accent top bar */
+.homeCta-accent-bar {
+  width: 56px;
+  height: 4px;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Description ---- */
+.homeCta-description {
+  font-family: var(--font-body, sans-serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin: 0 0 2rem 0;
+}
+
+/* ---- CTA Button ---- */
+.homeCta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--gradient-accent);
+  color: var(--text-inverse);
+  text-decoration: none;
+  font-family: var(--font-body, sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 1rem 2rem;
+  border-radius: 0.6rem;
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 6px 24px var(--card-glow), 0 2px 8px var(--shadow-color);
+}
+
+.homeCta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.homeCta-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 40px var(--card-glow), 0 4px 16px var(--shadow-color);
+}
+
+.homeCta-btn:hover::before {
+  opacity: 1;
+}
+
+.btn-text,
+.btn-arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
+
+.homeCta-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ---- Footnote ---- */
+.homeCta-footnote {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 1.25rem 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.homeCta-footnote::before {
+  content: '✓';
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+/* ===== Keyframes ===== */
+
+@keyframes ctaFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slowSpin {
+  from { transform: translate(0, -50%) rotate(0deg); }
+  to   { transform: translate(0, -50%) rotate(360deg); }
+}
+
+/* Ring-inner needs different transform-origin to stay centered */
+.ring-inner {
+  animation-name: slowSpinInner;
+}
+
+@keyframes slowSpinInner {
+  from { transform: translate(0, -50%) rotate(0deg); }
+  to   { transform: translate(0, -50%) rotate(-360deg); }
+}
+
+@keyframes blobShift {
+  0%   { border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%; }
+  50%  { border-radius: 60% 40% 45% 55% / 45% 55% 45% 55%; }
+  100% { border-radius: 50% 50% 55% 45% / 40% 60% 40% 60%; }
+}
+
+/* Orbit dot animations — small dots moving in slow circular arcs */
+@keyframes orbitDotA {
+  0%   { transform: rotate(0deg)   translateX(310px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(310px) rotate(-360deg); }
+}
+
+@keyframes orbitDotB {
+  0%   { transform: rotate(0deg)   translateX(190px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(190px) rotate(-360deg); }
+}
+
+@keyframes orbitDotC {
+  0%   { transform: rotate(0deg)   translateX(260px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(260px) rotate(-360deg); }
+}
+
+/* Orbital dot transform-origin adjustments */
+.dot-a { transform-origin: -150px 0; }
+.dot-b { transform-origin: -130px 0; }
+.dot-c { transform-origin: -200px 0; }
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .homeCta-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .homeCta-section {
+    padding: 5rem 0 4.5rem;
+  }
+
+  .ring-outer,
+  .ring-inner {
+    left: auto;
+    right: -180px;
+    top: auto;
+    bottom: -120px;
+  }
+
+  .homeCta-blend-overlay {
+    width: 70%;
+    top: -20%;
+    right: -15%;
+  }
+}
+
+@media (max-width: 640px) {
+  .homeCta-container {
+    padding: 0 1.5rem;
+  }
+
+  .homeCta-content-card {
+    padding: 1.75rem 1.5rem 1.5rem;
+  }
+
+  .homeCta-headline {
+    font-size: clamp(2.4rem, 10vw, 3.5rem);
+  }
+
+  .headline-stroke {
+    -webkit-text-stroke-width: 1.5px;
+  }
+
+  .ring-outer {
+    width: 380px;
+    height: 380px;
+  }
+
+  .ring-inner {
+    width: 240px;
+    height: 240px;
+  }
+}

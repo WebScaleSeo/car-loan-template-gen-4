@@ -1,0 +1,294 @@
+/* =========================================
+   Header — Floating Pill Archetype
+   Mood: Elegant & Refined | NEUTRAL bg
+   ========================================= */
+
+/* Entrance fade-in */
+@keyframes headerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle glow pulse on logo mark */
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--card-glow); }
+  50%       { box-shadow: 0 0 0 6px var(--card-glow); }
+}
+
+/* Animated underline slide-in */
+@keyframes underlineIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ---- Root ---- */
+.header-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;           /* pass-through except pill */
+  animation: headerFadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---- Floating Pill ---- */
+.header-pill {
+  pointer-events: all;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: min(1160px, calc(100vw - 32px));
+  padding: 0 28px;
+  height: 60px;
+  border-radius: 50px;
+
+  /* Neutral warm base — off-white with warmth */
+  background: color-mix(in srgb, var(--bg-surface) 82%, transparent);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+
+  border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
+  box-shadow:
+    0 2px 8px var(--shadow-color),
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  /* Smooth color-shift transition on scroll */
+  transition:
+    background 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease,
+    height 0.3s ease;
+}
+
+/* Scrolled state: more opaque, richer shadow, slight color shift */
+.header-pill--scrolled {
+  background: color-mix(in srgb, var(--bg-surface) 96%, transparent);
+  border-color: color-mix(in srgb, var(--primary-color) 14%, transparent);
+  box-shadow:
+    0 8px 32px var(--shadow-color),
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  height: 56px;
+}
+
+/* ---- Logo ---- */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+
+.header-logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--gradient-accent);
+  position: relative;
+  animation: logoPulse 3.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.header-logo-inner {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 2.5px solid var(--text-inverse);
+  border-radius: 3px;
+  position: relative;
+}
+
+.header-logo-inner::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 5px;
+  height: 5px;
+  background: var(--text-inverse);
+  border-radius: 1px;
+}
+
+.header-logo-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+/* ---- Navigation ---- */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  /* Center the nav between logo and CTA */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header-nav-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 14px;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: 30px;
+  transition: color 0.25s ease, background 0.25s ease;
+  white-space: nowrap;
+}
+
+.header-nav-link:hover {
+  color: var(--primary-color);
+  background: color-mix(in srgb, var(--primary-color) 5%, transparent);
+}
+
+.header-nav-link-text {
+  display: block;
+  line-height: 1;
+}
+
+/* Animated underline */
+.header-nav-underline {
+  display: block;
+  height: 1.5px;
+  width: calc(100% - 28px);
+  background: var(--gradient-accent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 1px;
+}
+
+.header-nav-link:hover .header-nav-underline {
+  transform: scaleX(1);
+}
+
+/* ---- CTA Button ---- */
+.header-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 22px;
+  border-radius: 40px;
+  background: var(--gradient-accent);
+  color: var(--text-inverse);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.2s ease,
+    filter 0.25s ease;
+  box-shadow: 0 2px 12px var(--card-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.header-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0));
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.header-cta:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 24px var(--card-glow), 0 2px 8px rgba(0,0,0,0.12);
+  filter: brightness(1.08);
+}
+
+.header-cta:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .header-pill {
+    padding: 0 16px;
+    gap: 0;
+  }
+
+  .header-nav {
+    position: static;
+    transform: none;
+    gap: 0;
+  }
+
+  .header-nav-link {
+    padding: 6px 8px;
+    font-size: 0.78rem;
+  }
+
+  .header-logo-text {
+    font-size: 0.85rem;
+  }
+
+  .header-cta {
+    padding: 7px 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-pill {
+    padding: 0 12px;
+    height: 54px;
+    width: calc(100vw - 24px);
+  }
+
+  .header-nav {
+    gap: 0;
+  }
+
+  .header-nav-link {
+    padding: 5px 6px;
+    font-size: 0.72rem;
+  }
+
+  .header-logo-mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-logo-text {
+    display: none;
+  }
+
+  .header-cta {
+    padding: 6px 12px;
+    font-size: 0.68rem;
+  }
+}

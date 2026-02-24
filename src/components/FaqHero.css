@@ -1,0 +1,442 @@
+/* =========================================================
+   FaqHero — Artsy & Expressive Hero  |  ACCENT + GRADIENT
+   ========================================================= */
+
+/* --- Root Section ---------------------------------------- */
+.faqHero-section {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse 65% 50% at 85% 30%, var(--card-glow) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 65% at 10% 90%, var(--decorative-color) 0%, transparent 55%),
+    linear-gradient(140deg, var(--section-dark-bg) 0%, var(--hero-gradient-from) 45%, var(--hero-gradient-to) 100%);
+}
+
+/* --- Noise / Grain Texture ------------------------------- */
+.faqHero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- Floating Orbs — top-right corner only, away from text */
+.faqHero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.faqHero-orb--1 {
+  width: 500px;
+  height: 500px;
+  top: -160px;
+  right: -140px;
+  background: radial-gradient(circle, var(--card-glow) 0%, transparent 70%);
+  animation: faqOrbPulse1 7s ease-in-out infinite;
+}
+
+.faqHero-orb--2 {
+  width: 300px;
+  height: 300px;
+  bottom: 60px;
+  right: -60px;
+  background: radial-gradient(circle, var(--decorative-color) 0%, transparent 70%);
+  animation: faqOrbPulse2 9s ease-in-out infinite;
+}
+
+@keyframes faqOrbPulse1 {
+  0%, 100% { opacity: 0.5;  transform: scale(1); }
+  50%       { opacity: 0.85; transform: scale(1.1); }
+}
+@keyframes faqOrbPulse2 {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 0.65; transform: scale(1.08); }
+}
+
+/* --- Corner accent — top-right decorative shape ---------- */
+.faqHero-corner-accent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 180px;
+  background: var(--gradient-accent);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  opacity: 0.25;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* --- Inner Container ------------------------------------ */
+.faqHero-inner {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 5rem 3.5rem 4.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Badge Label ---------------------------------------- */
+.faqHero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 100px;
+  padding: 0.4rem 1rem;
+  margin-bottom: 2.5rem;
+  backdrop-filter: blur(6px);
+}
+
+.faqHero-badge span:last-child {
+  color: var(--text-inverse);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.faqHero-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  flex-shrink: 0;
+  animation: faqDotBlink 2.2s ease-in-out infinite;
+}
+
+@keyframes faqDotBlink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--card-glow); }
+  50%       { opacity: 0.7; box-shadow: 0 0 0 6px transparent; }
+}
+
+/* --- Editorial Grid ------------------------------------- */
+.faqHero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* --- Headline Column ------------------------------------ */
+.faqHero-headline-col {
+  position: relative;
+}
+
+.faqHero-headline {
+  font-size: clamp(3.2rem, 5.5vw, 5.6rem);
+  font-weight: 900;
+  line-height: 1.04;
+  color: var(--text-inverse);
+  margin: 0 0 0 0;
+  letter-spacing: -0.025em;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 4px 40px var(--shadow-color);
+}
+
+/* Giant decorative "?" — sits BELOW the headline text, not over it */
+.faqHero-deco-glyph {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: clamp(8rem, 14vw, 14rem);
+  font-weight: 900;
+  color: transparent;
+  font-family: inherit;
+  line-height: 0.9;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
+  letter-spacing: -0.05em;
+  user-select: none;
+  pointer-events: none;
+  animation: faqGlyphPulse 8s ease-in-out infinite;
+}
+
+@keyframes faqGlyphPulse {
+  0%, 100% { -webkit-text-stroke-color: rgba(255, 255, 255, 0.08); }
+  50%       { -webkit-text-stroke-color: rgba(255, 255, 255, 0.16); }
+}
+
+/* --- Content Column ------------------------------------- */
+.faqHero-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-top: 0.75rem;
+}
+
+.faqHero-subheadline {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-inverse);
+  margin: 0;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+/* --- Pull-Quote Block ----------------------------------- */
+.faqHero-pullquote {
+  margin: 0;
+  padding: 1.8rem 2rem 1.8rem 2.2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid var(--accent-color);
+  border-radius: 0 14px 14px 0;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+.faqHero-pullquote::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Pulsing glow accent on the pull-quote */
+.faqHero-pullquote::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0 14px 14px 0;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  animation: faqQuotePulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes faqQuotePulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06) inset, 0 0 20px var(--card-glow); }
+  50%       { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12) inset, 0 0 40px var(--card-glow); }
+}
+
+.faqHero-pullquote-mark {
+  position: absolute;
+  top: -0.6rem;
+  left: 1.2rem;
+  font-size: 5.5rem;
+  color: var(--accent-color);
+  opacity: 0.28;
+  font-family: Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.faqHero-pullquote p {
+  font-size: 1.18rem;
+  font-weight: 700;
+  line-height: 1.52;
+  color: var(--text-inverse);
+  margin: 0 0 0.9rem;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.01em;
+}
+
+.faqHero-pullquote cite {
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  position: relative;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+/* --- CTA Button ----------------------------------------- */
+.faqHero-cta {
+  display: flex;
+}
+
+.faqHero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2.2rem;
+  background: var(--gradient-accent);
+  color: var(--text-inverse);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  border-radius: 6px;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  animation: faqBtnPulse 3.5s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.faqHero-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  border-radius: 6px;
+}
+
+.faqHero-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 16px 48px var(--shadow-color);
+  animation-play-state: paused;
+}
+
+.faqHero-btn:hover::before {
+  opacity: 1;
+}
+
+.faqHero-btn-icon {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.faqHero-btn:hover .faqHero-btn-icon {
+  transform: translateX(4px);
+}
+
+@keyframes faqBtnPulse {
+  0%, 100% { box-shadow: 0 4px 22px var(--shadow-color); }
+  50%       { box-shadow: 0 4px 44px var(--card-glow), 0 0 0 4px rgba(255, 255, 255, 0.04); }
+}
+
+/* --- Ribbon Banner — anchored at BOTTOM of section ------ */
+.faqHero-ribbon {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 38px;
+  background: var(--gradient-accent);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.85;
+  /* slight tilt via transform on inner track */
+}
+
+.faqHero-ribbon-track {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  white-space: nowrap;
+  animation: faqRibbonScroll 18s linear infinite;
+  /* Start off-screen left, scroll to right */
+}
+
+.faqHero-ribbon-track span,
+.faqHero-ribbon-sep {
+  color: var(--text-inverse);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.faqHero-ribbon-sep {
+  opacity: 0.45;
+}
+
+@keyframes faqRibbonScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --- Entrance Animations -------------------------------- */
+.faqHero-anim {
+  opacity: 0;
+  animation: faqFadeUp 0.75s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.faqHero-anim--1 { animation-delay: 0.1s; }
+.faqHero-anim--2 { animation-delay: 0.28s; }
+.faqHero-anim--3 { animation-delay: 0.48s; }
+.faqHero-anim--4 { animation-delay: 0.66s; }
+.faqHero-anim--5 { animation-delay: 0.84s; }
+
+@keyframes faqFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive ----------------------------------------- */
+@media (max-width: 1024px) {
+  .faqHero-inner {
+    padding: 4.5rem 2.5rem 4rem;
+  }
+
+  .faqHero-grid {
+    gap: 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .faqHero-inner {
+    padding: 3.5rem 1.5rem 3rem;
+  }
+
+  .faqHero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .faqHero-headline {
+    font-size: clamp(2.6rem, 9vw, 3.8rem);
+  }
+
+  .faqHero-deco-glyph {
+    font-size: clamp(5rem, 18vw, 8rem);
+    margin-top: 1rem;
+  }
+
+  .faqHero-orb--1 {
+    width: 280px;
+    height: 280px;
+    top: -100px;
+    right: -80px;
+  }
+
+  .faqHero-orb--2 {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .faqHero-inner {
+    padding: 3rem 1.25rem 2.5rem;
+  }
+
+  .faqHero-badge {
+    margin-bottom: 1.75rem;
+  }
+
+  .faqHero-pullquote {
+    padding: 1.4rem 1.5rem 1.4rem 1.75rem;
+  }
+
+  .faqHero-pullquote p {
+    font-size: 1.05rem;
+  }
+
+  .faqHero-corner-accent {
+    width: 100px;
+    height: 100px;
+  }
+}

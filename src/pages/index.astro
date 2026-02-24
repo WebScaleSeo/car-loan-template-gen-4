@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import HeroSection from '../components/HeroSection';
+import BenefitsGrid from '../components/BenefitsGrid';
+import HowItWorksSteps from '../components/HowItWorksSteps';
+import LoanTypesShowcase from '../components/LoanTypesShowcase';
+import TestimonialsCarousel from '../components/TestimonialsCarousel';
+import WhyChooseUs from '../components/WhyChooseUs';
+import HomeCta from '../components/HomeCta';
+
+import siteConfig from '../../siteConfig.json';
+import cloudflareConfig from '../../cloudflareConfig.json';
+const { global, pages } = siteConfig.site;
+const pageData = pages.home;
+const seo = { title: pageData.seo.title, metaDescription: pageData.seo.metaDescription };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": seo.title,
+  "description": seo.metaDescription
+})}></script>
+
+
+<Layout seo={seo} canonicalPath="/">
+  <Header navigation={global.navigation} branding={global.branding} />
+  <main>
+    <HeroSection data={pageData.sections.heroSection} client:load />
+    <BenefitsGrid data={pageData.sections.benefitsGrid} client:load />
+    <HowItWorksSteps data={pageData.sections.howItWorksSteps} client:load />
+    <LoanTypesShowcase data={pageData.sections.loanTypesShowcase} client:load />
+    <TestimonialsCarousel data={pageData.sections.testimonialsCarousel} client:load />
+    <WhyChooseUs data={pageData.sections.whyChooseUs} client:load />
+    <HomeCta data={pageData.sections.homeCta} client:load />
+  </main>
+  <Footer footer={global.footer} />
+</Layout>

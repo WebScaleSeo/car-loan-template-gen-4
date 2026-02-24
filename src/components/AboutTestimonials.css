@@ -1,0 +1,479 @@
+/* =====================================================
+   AboutTestimonials — Light + Gradient | Staggered Columns
+   Visual: Ribbon/banner accents + multi-layered shadows
+   Motion: Orbital/circular decorative elements
+   ===================================================== */
+
+/* ----- Section Shell ----- */
+.at-section {
+  position: relative;
+  overflow: hidden;
+  padding: 7rem 0 8rem;
+  background:
+    radial-gradient(ellipse 70% 55% at 15% 25%, var(--decorative-color), transparent 60%),
+    radial-gradient(ellipse 55% 65% at 85% 75%, var(--card-glow), transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 0%, var(--decorative-color), transparent 55%),
+    linear-gradient(168deg, var(--bg-page) 0%, var(--bg-surface) 45%, var(--bg-page) 100%);
+}
+
+/* Pattern overlay — subtle dot grid for texture */
+.at-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, var(--decorative-color) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ----- Background Orbs (decorative, not content) ----- */
+.at-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.at-bg-orb--1 {
+  width: 560px;
+  height: 560px;
+  top: -180px;
+  right: -140px;
+  background: radial-gradient(circle at 40% 40%, var(--decorative-color), transparent 65%);
+  animation: at-orb-breathe 9s ease-in-out infinite alternate;
+}
+
+.at-bg-orb--2 {
+  width: 420px;
+  height: 420px;
+  bottom: -100px;
+  left: -80px;
+  background: radial-gradient(circle at 60% 60%, var(--card-glow), transparent 65%);
+  animation: at-orb-breathe 12s ease-in-out infinite alternate-reverse;
+}
+
+.at-bg-orb--3 {
+  width: 220px;
+  height: 220px;
+  top: 38%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, var(--card-glow), transparent 70%);
+  animation: at-orb-breathe 7s ease-in-out infinite alternate;
+}
+
+/* ----- Orbital Rings (slow spin, decorative-only) ----- */
+.at-orbital-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.at-orbital-ring--1 {
+  width: 700px;
+  height: 700px;
+  top: calc(50% - 350px);
+  right: -280px;
+  border: 1.5px dashed var(--decorative-color);
+  animation: at-ring-spin 28s linear infinite;
+}
+
+.at-orbital-ring--1::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--card-accent-border);
+  opacity: 0.4;
+  transform: translateX(-50%);
+}
+
+.at-orbital-ring--2 {
+  width: 340px;
+  height: 340px;
+  bottom: 4%;
+  left: -80px;
+  border: 1px solid var(--decorative-color);
+  animation: at-ring-spin 18s linear infinite reverse;
+}
+
+.at-orbital-ring--2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  opacity: 0.3;
+  transform: translateX(-50%);
+}
+
+/* ----- Inner content wrapper ----- */
+.at-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* ----- Section Header ----- */
+.at-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+  position: relative;
+  animation: at-fade-up 0.7s ease both;
+}
+
+/* Banner/ribbon behind the header */
+.at-banner-ribbon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(680px, 90%);
+  height: 90px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.at-banner-ribbon__left,
+.at-banner-ribbon__right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: var(--gradient-accent);
+  opacity: 0.06;
+}
+
+.at-banner-ribbon__left {
+  left: 0;
+  clip-path: polygon(0% 0%, 100% 0%, 96% 50%, 100% 100%, 0% 100%, 4% 50%);
+}
+
+.at-banner-ribbon__right {
+  right: 0;
+  clip-path: polygon(0% 0%, 100% 0%, 96% 50%, 100% 100%, 0% 100%, 4% 50%);
+}
+
+/* Badge pill above title */
+.at-badge {
+  display: inline-block;
+  padding: 0.35rem 1.1rem;
+  border-radius: 100px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border: 1px solid var(--card-accent-border);
+}
+
+/* Main section title */
+.at-title {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+/* Decorative accent row under title */
+.at-title-accent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.at-accent-line {
+  display: block;
+  width: 60px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gradient-accent);
+}
+
+.at-accent-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  box-shadow: 0 0 0 4px var(--card-glow);
+}
+
+/* ----- Staggered 2-Column Grid ----- */
+.at-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 2.25rem;
+  align-items: start;
+}
+
+/* Every odd card is staggered down for the column offset effect */
+.at-card--stagger {
+  margin-top: 3rem;
+}
+
+/* ----- Testimonial Card ----- */
+.at-card {
+  position: relative;
+  background: var(--bg-surface);
+  border-radius: 20px;
+  padding: 0 2rem 2rem;
+  overflow: hidden;
+  /* Multi-layered box shadows */
+  box-shadow:
+    0 2px 4px var(--shadow-color),
+    0 8px 24px var(--shadow-color),
+    0 20px 60px var(--card-glow),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  border: 1px solid var(--border-color);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  animation: at-fade-up 0.6s ease both;
+}
+
+.at-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow:
+    0 4px 8px var(--shadow-color),
+    0 16px 40px var(--shadow-color),
+    0 32px 80px var(--card-glow),
+    0 0 0 2px var(--card-accent-border),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+/* ----- Top Ribbon Accent on Card ----- */
+.at-card-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--gradient-accent);
+  border-radius: 20px 20px 0 0;
+}
+
+/* Dangling ribbon tail */
+.at-card-ribbon__tail {
+  position: absolute;
+  top: 6px;
+  left: 2.25rem;
+  display: block;
+  width: 32px;
+  height: 18px;
+  background: var(--gradient-accent);
+  opacity: 0.35;
+  clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);
+}
+
+/* ----- Decorative Quote Mark ----- */
+.at-quote-deco {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  font-size: 6.5rem;
+  line-height: 1;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--primary-color);
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 900;
+}
+
+/* ----- Quote Text ----- */
+.at-quote {
+  font-size: 0.975rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  font-style: italic;
+  margin: 2.5rem 0 1.5rem;
+  position: relative;
+  z-index: 1;
+  padding-left: 0;
+  border: none;
+}
+
+/* ----- Star Rating ----- */
+.at-stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1.75rem;
+}
+
+.at-star {
+  color: var(--accent-color);
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* ----- Author Footer ----- */
+.at-author {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Avatar circle with gradient */
+.at-author-avatar {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  color: var(--text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+  box-shadow:
+    0 4px 12px var(--card-glow),
+    0 0 0 3px var(--badge-bg);
+}
+
+.at-author-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.at-author-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.at-author-detail {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Verified pill badge */
+.at-verified-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--badge-text);
+  background: var(--badge-bg);
+  border: 1px solid var(--card-accent-border);
+  border-radius: 100px;
+  padding: 0.25rem 0.65rem;
+  white-space: nowrap;
+}
+
+/* =====================================================
+   KEYFRAMES
+   ===================================================== */
+
+/* Entrance: fade up from below — safe, settles to final position */
+@keyframes at-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background orbs — pulsing scale, decorative-only */
+@keyframes at-orb-breathe {
+  from {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1.35);
+    opacity: 0.85;
+  }
+}
+
+/* Orbital rings — slow rotation, decorative-only (no content inside) */
+@keyframes at-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 768px) {
+  .at-section {
+    padding: 5rem 0 6rem;
+  }
+
+  .at-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .at-card--stagger {
+    margin-top: 0;
+  }
+
+  .at-title {
+    font-size: 1.8rem;
+  }
+
+  .at-bg-orb--1 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .at-bg-orb--2 {
+    width: 240px;
+    height: 240px;
+  }
+
+  .at-orbital-ring--1 {
+    width: 400px;
+    height: 400px;
+    top: calc(50% - 200px);
+    right: -180px;
+  }
+
+  .at-card {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .at-quote {
+    font-size: 0.925rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .at-header {
+    margin-bottom: 3rem;
+  }
+
+  .at-verified-badge {
+    display: none;
+  }
+
+  .at-accent-line {
+    width: 40px;
+  }
+}

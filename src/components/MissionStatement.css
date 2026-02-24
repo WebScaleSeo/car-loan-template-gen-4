@@ -1,0 +1,557 @@
+/* ============================================================
+   MissionStatement — Dark + Gradient | Geometric & Structured
+   Sidebar panel overlay | Parallax depth | Morphing blobs
+   Rotating gradient shifts
+   ============================================================ */
+
+/* ---------- Section base ---------- */
+.mission-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--section-dark-bg);
+  padding: 7rem 0 6rem;
+  isolation: isolate;
+}
+
+/* ---------- Background depth layers ---------- */
+.mission-bg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dot grid parallax layer */
+.mission-bg-layer--grid {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  transform: translateZ(-1px) scale(1.1);
+  animation: gridDrift 18s linear infinite;
+}
+
+/* Radial glow in center — uses separate pseudo elements to avoid hardcoded rgba */
+.mission-bg-layer--radial {
+  animation: radialShift 12s ease-in-out infinite alternate;
+}
+
+.mission-bg-layer--radial::before,
+.mission-bg-layer--radial::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.mission-bg-layer--radial::before {
+  width: 70%;
+  height: 120%;
+  top: -10%;
+  right: 0;
+  background: var(--accent-color);
+  opacity: 0.12;
+  filter: blur(80px);
+}
+
+.mission-bg-layer--radial::after {
+  width: 40%;
+  height: 160%;
+  top: -30%;
+  left: -5%;
+  background: var(--secondary-color);
+  opacity: 0.2;
+  filter: blur(90px);
+}
+
+/* ---------- Morphing blobs ---------- */
+.mission-blob {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  z-index: 0;
+}
+
+.mission-blob--1 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, var(--secondary-color), transparent 70%);
+  top: -120px;
+  right: 10%;
+  animation: blobMorph1 14s ease-in-out infinite;
+}
+
+.mission-blob--2 {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, var(--accent-color), transparent 70%);
+  bottom: -80px;
+  left: 20%;
+  opacity: 0.3;
+  animation: blobMorph2 18s ease-in-out infinite;
+}
+
+.mission-blob--3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--hero-gradient-to), transparent 70%);
+  top: 40%;
+  right: 5%;
+  opacity: 0.25;
+  animation: blobMorph3 22s ease-in-out infinite;
+}
+
+/* ---------- Decorative gradient ring ---------- */
+.mission-gradient-ring {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  top: 50%;
+  right: -180px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.06);
+  animation: ringPulse 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mission-gradient-ring::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: transparent;
+}
+
+.mission-gradient-ring::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--accent-color);
+  opacity: 0.08;
+  filter: blur(40px);
+}
+
+/* ---------- Main layout ---------- */
+.mission-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 0;
+  align-items: start;
+  animation: sectionEntrance 0.9s ease both;
+}
+
+/* ---------- Sidebar panel ---------- */
+.mission-sidebar {
+  position: relative;
+  padding: 2.5rem 2rem 2.5rem 0;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: slideInLeft 0.8s ease 0.15s both;
+}
+
+.mission-sidebar__accent-line {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--accent-color) 30%,
+    var(--secondary-color) 70%,
+    transparent 100%
+  );
+  animation: accentLinePulse 3s ease-in-out infinite;
+}
+
+.mission-sidebar__tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mission-sidebar__tag-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  box-shadow: 0 0 8px var(--accent-color);
+  animation: dotPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.mission-sidebar__tag-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-inverse);
+}
+
+.mission-sidebar__title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--text-inverse);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* Geometric diamonds */
+.mission-sidebar__geo {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.mission-geo-diamond {
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  transform: rotate(45deg);
+  opacity: 0.8;
+  animation: diamondPulse 3s ease-in-out infinite;
+}
+
+.mission-geo-diamond--sm {
+  width: 10px;
+  height: 10px;
+  border-color: rgba(255,255,255,0.4);
+  animation-delay: 1.5s;
+}
+
+.mission-sidebar__divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color),
+    rgba(255,255,255,0.1),
+    transparent
+  );
+}
+
+.mission-sidebar__label {
+  font-size: 0.8rem;
+  color: var(--text-inverse);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Decorative stacked lines */
+.mission-sidebar__deco-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.mission-sidebar__deco-line {
+  height: 2px;
+  width: 60%;
+  background: linear-gradient(to right, var(--accent-color), transparent);
+  opacity: 0.6;
+  border-radius: 2px;
+}
+
+.mission-sidebar__deco-line--sm {
+  width: 40%;
+  opacity: 0.4;
+}
+
+.mission-sidebar__deco-line--xs {
+  width: 25%;
+  opacity: 0.25;
+}
+
+/* ---------- Main content area ---------- */
+.mission-content {
+  position: relative;
+  padding: 2.5rem 0 2.5rem 3rem;
+  animation: slideInRight 0.8s ease 0.3s both;
+}
+
+/* Geometric topbar */
+.mission-content__topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.mission-topbar__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.04)
+  );
+}
+
+.mission-topbar__diamond {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--accent-color);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  background: transparent;
+}
+
+/* Body text */
+.mission-body {
+  position: relative;
+}
+
+.mission-body__quote-mark {
+  position: absolute;
+  top: -1.5rem;
+  left: -0.5rem;
+  font-size: 7rem;
+  line-height: 1;
+  color: var(--accent-color);
+  opacity: 0.2;
+  font-family: Georgia, serif;
+  pointer-events: none;
+  select: none;
+  z-index: 0;
+}
+
+.mission-body__text {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.85;
+  color: var(--text-inverse);
+  margin: 0;
+  max-width: 680px;
+}
+
+/* Vision block */
+.mission-vision {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-left: 3px solid var(--accent-color);
+  border-radius: 0 6px 6px 0;
+}
+
+.mission-vision__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-inverse);
+  margin-bottom: 0.5rem;
+}
+
+.mission-vision__text {
+  color: var(--text-inverse);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* 3×3 dot grid decoration */
+.mission-content__geo-grid {
+  position: absolute;
+  bottom: 2rem;
+  right: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.mission-grid-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-inverse);
+}
+
+/* Bottom bar */
+.mission-content__bottombar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.mission-bottombar__bracket {
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  font-family: monospace;
+}
+
+.mission-bottombar__text {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-inverse);
+}
+
+/* ============================================================
+   @keyframes
+   ============================================================ */
+
+@keyframes sectionEntrance {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+@keyframes gridDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 36px 36px; }
+}
+
+@keyframes radialShift {
+  0%   { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 1;   transform: scale(1.08); }
+}
+
+@keyframes blobMorph1 {
+  0%, 100% { border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; transform: translateY(0) scale(1); }
+  33%       { border-radius: 40% 60% 45% 55% / 60% 40% 60% 40%; transform: translateY(-20px) scale(1.05); }
+  66%       { border-radius: 55% 45% 60% 40% / 40% 55% 45% 60%; transform: translateY(10px) scale(0.97); }
+}
+
+@keyframes blobMorph2 {
+  0%, 100% { border-radius: 50% 50% 60% 40% / 60% 40% 50% 50%; transform: translateY(0) scale(1); }
+  50%       { border-radius: 40% 60% 40% 60% / 50% 50% 60% 40%; transform: translateY(-15px) scale(1.06); }
+}
+
+@keyframes blobMorph3 {
+  0%, 100% { border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%; transform: translateX(0) scale(1); }
+  50%       { border-radius: 60% 40% 55% 45% / 40% 60% 40% 60%; transform: translateX(12px) scale(1.04); }
+}
+
+@keyframes accentLinePulse {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1; }
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.6; }
+}
+
+@keyframes diamondPulse {
+  0%, 100% { opacity: 0.8; transform: rotate(45deg) scale(1); }
+  50%       { opacity: 0.5; transform: rotate(45deg) scale(0.85); }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .mission-inner {
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+  }
+  .mission-sidebar__title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mission-section {
+    padding: 5rem 0 4rem;
+  }
+
+  .mission-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .mission-sidebar {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 0 0 2rem 0;
+    min-height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .mission-sidebar__accent-line { display: none; }
+  .mission-sidebar__deco-lines { display: none; }
+  .mission-sidebar__geo { display: none; }
+  .mission-sidebar__divider { display: none; }
+
+  .mission-sidebar__title {
+    font-size: 2.4rem;
+    width: 100%;
+  }
+
+  .mission-content {
+    padding: 2rem 0 0 0;
+  }
+
+  .mission-gradient-ring {
+    width: 400px;
+    height: 400px;
+    right: -150px;
+  }
+
+  .mission-blob--1 {
+    width: 280px;
+    height: 280px;
+  }
+
+  .mission-body__quote-mark {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .mission-inner {
+    padding: 0 1.25rem;
+  }
+
+  .mission-body__text {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .mission-content__geo-grid {
+    display: none;
+  }
+}

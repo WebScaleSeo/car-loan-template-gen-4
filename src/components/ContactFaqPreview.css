@@ -1,0 +1,685 @@
+/* ============================================================
+   ContactFaqPreview — Geometric Structured / L-Shaped Layout
+   Accent background treatment | Split-tone | Wireframe accents
+   ============================================================ */
+
+/* ── Section Shell ── */
+.cfp-section {
+  position: relative;
+  background: linear-gradient(145deg, var(--section-dark-bg) 0%, var(--primary-color) 55%, var(--hero-gradient-to) 100%);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ── Background grid pattern ── */
+.cfp-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Diagonal accent stripe ── */
+.cfp-diagonal-stripe {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 420px;
+  height: 140%;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.06) 50%,
+    rgba(255,255,255,0.01) 100%
+  );
+  transform: skewX(-12deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Geometric wireframe boxes ── */
+.cfp-wire {
+  position: absolute;
+  border: 1px solid rgba(255,255,255,0.08);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cfp-wire-1 {
+  top: 40px;
+  left: 36px;
+  width: 180px;
+  height: 180px;
+  animation: wireFloat 8s ease-in-out infinite;
+}
+
+.cfp-wire-2 {
+  top: 60px;
+  left: 56px;
+  width: 140px;
+  height: 140px;
+  border-color: rgba(255,255,255,0.05);
+  animation: wireFloat 8s ease-in-out infinite 2s;
+}
+
+.cfp-wire-3 {
+  bottom: 80px;
+  right: 80px;
+  width: 120px;
+  height: 120px;
+  border-color: rgba(255,255,255,0.07);
+  animation: wireFloat 10s ease-in-out infinite 1s;
+}
+
+.cfp-wire-4 {
+  bottom: 100px;
+  right: 60px;
+  width: 80px;
+  height: 80px;
+  border-color: rgba(255,255,255,0.04);
+  animation: wireFloat 10s ease-in-out infinite 3s;
+}
+
+@keyframes wireFloat {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(4px, -6px) rotate(0.5deg); }
+  66% { transform: translate(-3px, 4px) rotate(-0.3deg); }
+}
+
+/* ── L-Shaped Grid Layout ── */
+/*
+  Columns: [left-panel 360px] [right-panel flex]
+  Rows:    [content-row auto] [bottom-bar auto]
+  Left panel spans row 1 only.
+  Bottom bar spans both columns = horizontal arm of L.
+*/
+.cfp-l-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  grid-template-rows: 1fr auto;
+  min-height: 560px;
+}
+
+/* ── LEFT PANEL — vertical arm ── */
+.cfp-left-panel {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  background: var(--section-dark-bg);
+  padding: 3.5rem 2.5rem 3rem;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+  animation: cfpFadeInLeft 0.7s ease both;
+}
+
+/* Split-tone overlay on left panel */
+.cfp-left-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    170deg,
+    rgba(255,255,255,0.04) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Corner accent line — top-left */
+.cfp-left-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent-color) 0%, transparent 100%);
+}
+
+/* ── Eyebrow label ── */
+.cfp-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  animation: cfpFadeInUp 0.6s ease 0.2s both;
+}
+
+.cfp-eyebrow-rule {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.cfp-eyebrow-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── Section Title ── */
+.cfp-title {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-inverse);
+  margin: 0 0 1rem;
+  animation: cfpFadeInUp 0.6s ease 0.3s both;
+}
+
+/* ── Section Subtitle ── */
+.cfp-subtitle {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 2.5rem;
+  animation: cfpFadeInUp 0.6s ease 0.4s both;
+}
+
+/* ── Counter ticker block ── */
+.cfp-counter-block {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  animation: cfpFadeInUp 0.6s ease 0.5s both;
+}
+
+.cfp-counter-frame {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.04);
+}
+
+/* Corner brackets on the counter frame */
+.cfp-counter-frame::before,
+.cfp-counter-frame::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--accent-color);
+  border-style: solid;
+}
+.cfp-counter-frame::before {
+  top: -2px;
+  left: -2px;
+  border-width: 2px 0 0 2px;
+}
+.cfp-counter-frame::after {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 2px 2px 0;
+}
+
+.cfp-counter-num {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--text-inverse);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: all 0.15s ease;
+}
+
+/* Scanning line animation on counter */
+.cfp-counter-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  animation: scanLine 1.8s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+@keyframes scanLine {
+  0% { top: 10%; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 90%; opacity: 0; }
+}
+
+.cfp-counter-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cfp-counter-label {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Progress dots */
+.cfp-counter-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.cfp-dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.cfp-dot--active {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+/* Geometric L-bracket decorations on left panel */
+.cfp-bracket {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: rgba(255,255,255,0.15);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.cfp-bracket--tl {
+  top: 1.5rem;
+  right: 1.5rem;
+  border-width: 1px 0 0 1px;
+}
+
+.cfp-bracket--br {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  border-width: 0 1px 1px 0;
+}
+
+/* ── RIGHT PANEL — FAQ accordion ── */
+.cfp-right-panel {
+  grid-column: 2;
+  grid-row: 1;
+  background: var(--primary-color);
+  padding: 3.5rem 3rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Split-tone right panel gradient overlay */
+.cfp-right-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.03) 0%,
+    transparent 50%,
+    rgba(0,0,0,0.1) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── FAQ List ── */
+.cfp-faq-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── FAQ Item ── */
+.cfp-faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  animation: cfpFadeInRight 0.5s ease both;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.cfp-faq-item:first-child {
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.cfp-faq-item.is-open {
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── FAQ Trigger Button ── */
+.cfp-faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1rem 1.25rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-inverse);
+  transition: background 0.25s ease;
+}
+
+.cfp-faq-trigger:hover {
+  background: rgba(255,255,255,0.05);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.cfp-faq-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.1em;
+  min-width: 28px;
+  flex-shrink: 0;
+}
+
+.cfp-faq-question {
+  flex: 1;
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: var(--text-inverse);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+
+/* ── +/− toggle icon ── */
+.cfp-faq-toggle {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cfp-toggle-bar {
+  position: absolute;
+  background: var(--text-inverse);
+  border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.cfp-toggle-bar--h {
+  width: 10px;
+  height: 1.5px;
+}
+
+.cfp-toggle-bar--v {
+  width: 1.5px;
+  height: 10px;
+}
+
+/* When open: vertical bar collapses */
+.is-open .cfp-toggle-bar--v {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+/* ── FAQ Answer ── */
+.cfp-faq-answer {
+  padding: 0 1rem 1.25rem 2.75rem;
+}
+
+.cfp-faq-answer p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+}
+
+/* ── View All Link ── */
+.cfp-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-inverse);
+  text-decoration: none;
+  transition: gap 0.2s ease, opacity 0.2s ease;
+  position: relative;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.cfp-view-all::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--text-inverse);
+  transition: width 0.3s ease;
+}
+
+.cfp-view-all:hover::after {
+  width: 100%;
+}
+
+.cfp-view-all:hover {
+  gap: 0.8rem;
+  opacity: 1;
+}
+
+.cfp-view-all-arrow {
+  transition: transform 0.2s ease;
+}
+
+.cfp-view-all:hover .cfp-view-all-arrow {
+  transform: translateX(4px);
+}
+
+/* ── BOTTOM BAR — horizontal arm of the L ── */
+.cfp-bottom-bar {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  background: var(--accent-color);
+  padding: 1.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+  animation: cfpFadeInUp 0.6s ease 0.6s both;
+}
+
+.cfp-bottom-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.cfp-bottom-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Decorative squares in bottom bar */
+.cfp-bottom-geo {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.cfp-bottom-geo-square {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid rgba(255,255,255,0.4);
+}
+
+.cfp-bottom-geo-square--2 {
+  top: 8px;
+  left: 8px;
+  width: 20px;
+  height: 20px;
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.08);
+}
+
+.cfp-bottom-text {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* ── Contact CTA Button ── */
+.cfp-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.6rem;
+  background: var(--text-inverse);
+  color: var(--accent-color);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease, gap 0.2s ease, transform 0.2s ease;
+  border: 2px solid transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.cfp-contact-btn:hover {
+  background: transparent;
+  color: var(--text-inverse);
+  border-color: rgba(255,255,255,0.8);
+  gap: 0.9rem;
+}
+
+.cfp-btn-arrow {
+  transition: transform 0.2s ease;
+}
+
+.cfp-contact-btn:hover .cfp-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Entrance Animations ── */
+@keyframes cfpFadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cfpFadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cfpFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive — mobile ── */
+@media (max-width: 768px) {
+  .cfp-l-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .cfp-left-panel {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 2.5rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .cfp-left-panel::after {
+    width: 100%;
+    height: 3px;
+    top: auto;
+    bottom: 0;
+    background: linear-gradient(90deg, var(--accent-color), transparent);
+  }
+
+  .cfp-right-panel {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 2rem 1.5rem;
+  }
+
+  .cfp-bottom-bar {
+    grid-column: 1;
+    grid-row: 3;
+    padding: 1.5rem;
+  }
+
+  .cfp-bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .cfp-title {
+    font-size: 1.5rem;
+  }
+
+  .cfp-wire-1,
+  .cfp-wire-2 {
+    display: none;
+  }
+
+  .cfp-contact-btn {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cfp-faq-trigger {
+    padding: 1rem 0.5rem;
+  }
+
+  .cfp-faq-answer {
+    padding: 0 0.5rem 1rem 2.5rem;
+  }
+}

@@ -1,0 +1,453 @@
+/* =============================================
+   HowItWorksSteps — Dramatic cinematic split-screen
+   NEUTRAL+PATTERN bg | Staggered card cascade
+   ============================================= */
+
+/* ---- Keyframes ---- */
+
+@keyframes hiwCardCascade {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hiwFadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes hiwOrb1Float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(18px, -24px) scale(1.08); }
+}
+
+@keyframes hiwOrb2Float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-14px, 18px) scale(0.94); }
+}
+
+@keyframes hiwPulse {
+  0%, 100% { opacity: 0.06; }
+  50%       { opacity: 0.14; }
+}
+
+@keyframes hiwLineGrow {
+  from { height: 0; opacity: 0; }
+  to   { height: 100%; opacity: 1; }
+}
+
+/* ---- Section wrapper ---- */
+
+.hiw-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Neutral warm base — bg-page is already a warm off-white */
+  background-color: var(--bg-page);
+}
+
+/* Dot pattern layer */
+.hiw-bg-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle, var(--border-color) 1.5px, transparent 1.5px);
+  background-size: 30px 30px;
+  opacity: 0.6;
+}
+
+/* ---- Split-screen grid ---- */
+
+.hiw-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  min-height: 680px;
+  align-items: stretch;
+}
+
+/* =============================================
+   LEFT PANEL — dark cinematic, bleed to left
+   ============================================= */
+
+.hiw-left-panel {
+  position: relative;
+  overflow: hidden;
+  /* Dark base */
+  background-color: var(--section-dark-bg);
+  /* Mesh gradient overlays */
+  background-image:
+    radial-gradient(ellipse 70% 55% at 15% 80%, var(--hero-gradient-to) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 45% at 85% 15%, var(--card-accent-border) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 50%, var(--section-dark-bg) 0%, transparent 100%);
+  /* Bleed to left viewport edge */
+  margin-left: calc(((100vw - 100%) / -2));
+  padding-left: calc(((100vw - 100%) / 2) + 64px);
+  padding-right: 60px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  display: flex;
+  align-items: center;
+  /* Diagonal right edge clip */
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+  animation: hiwFadeLeft 0.7s ease both;
+}
+
+.hiw-left-content {
+  position: relative;
+  z-index: 2;
+  max-width: 340px;
+}
+
+.hiw-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--card-accent-border);
+  margin-bottom: 20px;
+}
+
+.hiw-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--card-accent-border);
+  flex-shrink: 0;
+}
+
+.hiw-section-title {
+  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--text-inverse);
+  margin: 0 0 24px;
+  letter-spacing: -0.02em;
+}
+
+.hiw-section-subtitle {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-inverse);
+  opacity: 0.78;
+  margin: 0 0 36px;
+}
+
+.hiw-cta-line {
+  width: 56px;
+  height: 4px;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+}
+
+/* Mesh gradient orbs */
+.hiw-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hiw-orb-1 {
+  width: 320px;
+  height: 320px;
+  bottom: -80px;
+  left: -80px;
+  background: radial-gradient(circle, var(--hero-gradient-to), transparent 70%);
+  opacity: 0.35;
+  animation: hiwOrb1Float 9s ease-in-out infinite;
+}
+
+.hiw-orb-2 {
+  width: 200px;
+  height: 200px;
+  top: -40px;
+  right: 40px;
+  background: radial-gradient(circle, var(--card-accent-border), transparent 70%);
+  opacity: 0.25;
+  animation: hiwOrb2Float 12s ease-in-out infinite;
+}
+
+.hiw-orb-3 {
+  width: 140px;
+  height: 140px;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--accent-color), transparent 70%);
+  opacity: 0.18;
+  animation: hiwOrb1Float 7s ease-in-out infinite reverse;
+}
+
+/* Ghost word decoration */
+.hiw-bg-word {
+  position: absolute;
+  bottom: -10px;
+  right: -20px;
+  font-size: clamp(80px, 14vw, 160px);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  color: var(--text-inverse);
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 1;
+  animation: hiwPulse 6s ease-in-out infinite;
+  user-select: none;
+}
+
+/* =============================================
+   RIGHT PANEL — neutral, step cards
+   ============================================= */
+
+.hiw-right-panel {
+  position: relative;
+  padding: 72px 80px 72px 80px;
+  display: flex;
+  align-items: center;
+}
+
+.hiw-steps-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* Vertical connector line between cards */
+.hiw-connector-line {
+  position: absolute;
+  left: 28px;
+  top: 60px;
+  bottom: 60px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--card-accent-border),
+    var(--secondary-color),
+    var(--card-accent-border)
+  );
+  opacity: 0.3;
+  z-index: 0;
+  animation: hiwLineGrow 1s ease 0.3s both;
+}
+
+/* =============================================
+   STEP CARDS — cascade animation
+   ============================================= */
+
+.hiw-step-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: var(--bg-surface);
+  border-radius: 12px;
+  padding: 28px 32px 28px 28px;
+  /* Accent left border — bold color blocking */
+  border-left: 4px solid var(--card-accent-border);
+  box-shadow:
+    0 4px 20px var(--card-glow),
+    0 1px 4px var(--shadow-color);
+  overflow: hidden;
+  z-index: 1;
+  /* Staggered cascade entrance */
+  opacity: 0;
+  animation: hiwCardCascade 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hiw-step-card:hover {
+  transform: translateX(6px) translateY(-2px);
+  box-shadow:
+    0 12px 40px var(--card-glow),
+    0 2px 8px var(--shadow-color);
+}
+
+/* Ghost number — large decorative element behind card content */
+.hiw-ghost-num {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 7rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--primary-color);
+  opacity: 0.04;
+  letter-spacing: -0.06em;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+.hiw-step-card:hover .hiw-ghost-num {
+  opacity: 0.08;
+}
+
+/* Step number chip */
+.hiw-step-chip {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: var(--gradient-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 14px var(--card-glow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hiw-step-card:hover .hiw-step-chip {
+  transform: scale(1.08) rotate(-3deg);
+  box-shadow: 0 8px 24px var(--card-glow);
+}
+
+.hiw-step-num {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-inverse);
+  letter-spacing: 0.02em;
+}
+
+/* Step body */
+.hiw-step-body {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.hiw-step-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 10px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.hiw-step-desc {
+  font-size: 0.95rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Accent corner triangle decoration */
+.hiw-card-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 36px 36px 0;
+  border-color: transparent var(--badge-bg) transparent transparent;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.hiw-step-card:hover .hiw-card-corner {
+  opacity: 1;
+}
+
+/* =============================================
+   RESPONSIVE — Mobile
+   ============================================= */
+
+@media (max-width: 1023px) {
+  .hiw-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hiw-left-panel {
+    clip-path: none;
+    margin-left: 0;
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    min-height: 360px;
+  }
+
+  .hiw-left-content {
+    max-width: 100%;
+  }
+
+  .hiw-bg-word {
+    font-size: 100px;
+  }
+
+  .hiw-right-panel {
+    padding: 48px 32px;
+  }
+
+  .hiw-connector-line {
+    left: 26px;
+    top: 52px;
+    bottom: 52px;
+  }
+}
+
+@media (max-width: 639px) {
+  .hiw-left-panel {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .hiw-section-title {
+    font-size: 1.75rem;
+  }
+
+  .hiw-right-panel {
+    padding: 36px 20px;
+  }
+
+  .hiw-step-card {
+    padding: 20px 20px 20px 20px;
+    gap: 16px;
+  }
+
+  .hiw-step-chip {
+    width: 44px;
+    height: 44px;
+  }
+
+  .hiw-connector-line {
+    display: none;
+  }
+
+  .hiw-step-title {
+    font-size: 1.05rem;
+  }
+
+  .hiw-ghost-num {
+    font-size: 5rem;
+  }
+}

@@ -1,0 +1,450 @@
+/* ============================================================
+   FaqCta — Dramatic Cinematic / Layered Z-Depth / Pulsing Glow
+   ============================================================ */
+
+/* ─── Keyframes ─────────────────────────────────────────────── */
+
+@keyframes faqCta-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes faqCta-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes faqCta-glowPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1.18);
+  }
+}
+
+@keyframes faqCta-ringPulse1 {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.18;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 0.06;
+  }
+}
+
+@keyframes faqCta-ringPulse2 {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 0.03;
+  }
+}
+
+@keyframes faqCta-decoFloat {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50%       { transform: translateY(-18px) rotate(-8deg); }
+}
+
+@keyframes faqCta-btnGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 24px var(--card-glow),
+      0 4px 32px var(--shadow-color),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 48px var(--card-glow),
+      0 8px 48px var(--shadow-color),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+}
+
+/* ─── Root Section ───────────────────────────────────────────── */
+
+.faqCta-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+}
+
+/* ─── Layer 1: Background image ─────────────────────────────── */
+
+.faqCta-bg-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url('/images/image4.webp');
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+}
+
+/* ─── Layer 2: Aurora gradient overlay ──────────────────────── */
+
+.faqCta-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    135deg,
+    var(--hero-gradient-from) 0%,
+    var(--secondary-color) 40%,
+    var(--accent-color) 75%,
+    var(--hero-gradient-to) 100%
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.82;
+}
+
+/* ─── Layer 3: Cinematic dark scrim ─────────────────────────── */
+
+.faqCta-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.52);
+}
+
+/* ─── Layer 4: Oversized decorative "?" ─────────────────────── */
+
+.faqCta-deco-mark {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%) rotate(-8deg);
+  z-index: 4;
+  font-family: var(--font-heading, 'Oswald', sans-serif);
+  font-size: clamp(260px, 32vw, 480px);
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.07);
+  text-stroke: 2px rgba(255, 255, 255, 0.07);
+  user-select: none;
+  pointer-events: none;
+  animation: faqCta-decoFloat 8s ease-in-out infinite;
+  letter-spacing: -0.04em;
+}
+
+/* ─── Layer 5: Radial spotlight ─────────────────────────────── */
+
+.faqCta-spotlight {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--card-glow) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: faqCta-glowPulse 4s ease-in-out infinite;
+}
+
+/* ─── Layer 6: Pulsing rings ─────────────────────────────────── */
+
+.faqCta-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.faqCta-ring--1 {
+  z-index: 5;
+  width: 560px;
+  height: 560px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transform: translate(-50%, -50%) scale(1);
+  animation: faqCta-ringPulse1 5s ease-in-out infinite;
+}
+
+.faqCta-ring--2 {
+  z-index: 5;
+  width: 820px;
+  height: 820px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transform: translate(-50%, -50%) scale(1);
+  animation: faqCta-ringPulse2 7s ease-in-out infinite;
+}
+
+/* ─── Layer 7: Main content container ───────────────────────── */
+
+.faqCta-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.faqCta-inner {
+  max-width: 760px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+/* ─── Eyebrow ────────────────────────────────────────────────── */
+
+.faqCta-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  background: var(--badge-bg);
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+
+  animation: faqCta-fadeIn 0.7s ease both;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.faqCta-eyebrow-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  flex-shrink: 0;
+}
+
+/* ─── Headline ───────────────────────────────────────────────── */
+
+.faqCta-headline {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-inverse);
+  margin: 0;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+
+  animation: faqCta-fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.25s;
+  opacity: 0;
+}
+
+/* ─── Description ────────────────────────────────────────────── */
+
+.faqCta-description {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--text-inverse);
+  opacity: 0.88;
+  max-width: 620px;
+  margin: 0;
+
+  animation: faqCta-fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.42s;
+  opacity: 0;
+}
+
+/* ─── CTA Wrapper & Glow Pulse ───────────────────────────────── */
+
+.faqCta-cta-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: faqCta-fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+.faqCta-glow-pulse {
+  position: absolute;
+  inset: -12px;
+  border-radius: 999px;
+  background: var(--gradient-accent);
+  filter: blur(20px);
+  opacity: 0.45;
+  animation: faqCta-glowPulse 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── CTA Button ─────────────────────────────────────────────── */
+
+.faqCta-cta-button {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.95rem 2.25rem;
+  border-radius: 999px;
+  background: var(--gradient-accent);
+  color: var(--text-inverse);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 0 24px var(--card-glow),
+    0 4px 24px var(--shadow-color),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
+  animation: faqCta-btnGlow 3s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.faqCta-cta-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 0 56px var(--card-glow),
+    0 12px 40px var(--shadow-color),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+}
+
+.faqCta-cta-button:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.faqCta-btn-arrow {
+  font-size: 1.15rem;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.faqCta-cta-button:hover .faqCta-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ─── Corner accents ─────────────────────────────────────────── */
+
+.faqCta-corner {
+  position: absolute;
+  z-index: 8;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+}
+
+.faqCta-corner--tl {
+  top: 28px;
+  left: 28px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+
+  animation: faqCta-fadeIn 1s ease both;
+  animation-delay: 0.8s;
+  opacity: 0;
+}
+
+.faqCta-corner--br {
+  bottom: 28px;
+  right: 28px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+
+  animation: faqCta-fadeIn 1s ease both;
+  animation-delay: 0.9s;
+  opacity: 0;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .faqCta-section {
+    min-height: 460px;
+  }
+
+  .faqCta-content {
+    padding: 4.5rem 1.5rem;
+  }
+
+  .faqCta-deco-mark {
+    font-size: clamp(160px, 55vw, 260px);
+    right: -8%;
+    opacity: 0.6;
+  }
+
+  .faqCta-ring--1 {
+    width: 320px;
+    height: 320px;
+  }
+
+  .faqCta-ring--2 {
+    width: 500px;
+    height: 500px;
+  }
+
+  .faqCta-spotlight {
+    width: 400px;
+    height: 400px;
+  }
+
+  .faqCta-description {
+    font-size: 1rem;
+  }
+
+  .faqCta-corner {
+    width: 50px;
+    height: 50px;
+  }
+
+  .faqCta-corner--tl {
+    top: 16px;
+    left: 16px;
+  }
+
+  .faqCta-corner--br {
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 375px) {
+  .faqCta-content {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .faqCta-deco-mark {
+    display: none;
+  }
+
+  .faqCta-cta-button {
+    padding: 0.85rem 1.75rem;
+    font-size: 0.9rem;
+  }
+}

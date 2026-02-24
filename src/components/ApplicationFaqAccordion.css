@@ -1,0 +1,450 @@
+/* =========================================================
+   ApplicationFaqAccordion — Dramatic Cinematic ACCENT Section
+   Spatial: broken grid with overlap
+   Effects: holographic/iridescent + multi-layered box shadows
+   Motion: number ticker + staggered entrance
+   ========================================================= */
+
+/* ---------- Section wrapper ---------- */
+.afaq-section {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 2rem 7rem;
+  background: linear-gradient(
+    140deg,
+    var(--section-dark-bg) 0%,
+    var(--hero-gradient-from) 45%,
+    var(--hero-gradient-to) 100%
+  );
+  isolation: isolate;
+}
+
+/* ---------- Background dot-grid texture ---------- */
+.afaq-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---------- Floating orbs (decorative) ---------- */
+.afaq-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.afaq-orb-1 {
+  width: 480px;
+  height: 480px;
+  top: -140px;
+  right: -80px;
+  background: radial-gradient(circle, var(--card-glow) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: afaq-orb-pulse 6s ease-in-out infinite alternate;
+}
+
+.afaq-orb-2 {
+  width: 320px;
+  height: 320px;
+  bottom: -80px;
+  left: 5%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent-color) 18%, transparent) 0%, transparent 70%);
+  filter: blur(50px);
+  animation: afaq-orb-pulse 8s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes afaq-orb-pulse {
+  from { opacity: 0.6; transform: scale(1); }
+  to   { opacity: 1;   transform: scale(1.12); }
+}
+
+/* ---------- Cinematic spotlight beam ---------- */
+.afaq-beam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 100%;
+  background: conic-gradient(
+    from 270deg at 50% 0%,
+    transparent 80deg,
+    rgba(255,255,255,0.04) 90deg,
+    transparent 100deg
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Inner layout — broken grid ---------- */
+.afaq-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 0 4rem;
+  align-items: start;
+}
+
+/* ---------- Left column ---------- */
+.afaq-left {
+  position: relative;
+  padding-top: 1rem;
+  animation: afaq-slide-left 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes afaq-slide-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Eyebrow */
+.afaq-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.afaq-eyebrow-line {
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--gradient-accent);
+}
+
+.afaq-eyebrow-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  /* Iridescent shimmer on the label */
+  background: linear-gradient(
+    90deg,
+    var(--accent-color),
+    var(--card-accent-border),
+    var(--text-inverse),
+    var(--accent-color)
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: afaq-shimmer 3s linear infinite;
+}
+
+@keyframes afaq-shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* Title */
+.afaq-title {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-inverse);
+  margin: 0 0 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+/* Subtitle */
+.afaq-subtitle {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 2.5rem;
+  max-width: 320px;
+}
+
+/* ---------- Stats ticker block ---------- */
+.afaq-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 24px var(--shadow-color),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.afaq-stat {
+  padding: 1.1rem 1.5rem;
+}
+
+.afaq-stat-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.afaq-stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+  /* Iridescent gradient on numbers */
+  background: linear-gradient(
+    100deg,
+    #fff 30%,
+    var(--card-accent-border) 60%,
+    var(--hero-gradient-to) 80%,
+    #fff 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: afaq-shimmer 4s linear infinite;
+}
+
+.afaq-stat-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ---------- Oversized decorative FAQ label — breaks grid ---------- */
+.afaq-deco-label {
+  position: absolute;
+  bottom: -60px;
+  left: -20px;
+  font-size: 9rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.06);
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+  z-index: -1;
+}
+
+/* ---------- Right column ---------- */
+.afaq-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 0.5rem;
+}
+
+/* ---------- Accordion item ---------- */
+.afaq-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.3),
+    0 8px 32px var(--shadow-color),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  transition:
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+  animation: afaq-fade-up 0.55s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes afaq-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.afaq-item:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateX(4px);
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.4),
+    0 16px 48px var(--card-glow),
+    0 0 0 1px rgba(255,255,255,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.afaq-item--open {
+  background: rgba(255,255,255,0.09);
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.4),
+    0 20px 60px var(--card-glow),
+    0 0 0 1px rgba(255,255,255,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.14);
+}
+
+/* ---------- Holographic iridescent top border ---------- */
+.afaq-item-iridescent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-color),
+    var(--hero-gradient-to),
+    var(--text-inverse),
+    var(--card-accent-border),
+    var(--secondary-color),
+    transparent
+  );
+  background-size: 400% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: afaq-iri-move 4s linear infinite;
+}
+
+@keyframes afaq-iri-move {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+.afaq-item:hover .afaq-item-iridescent,
+.afaq-item--open .afaq-item-iridescent {
+  opacity: 1;
+}
+
+/* ---------- Question button ---------- */
+.afaq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Number badge */
+.afaq-num {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 30%, transparent);
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  min-width: 2.4rem;
+  text-align: center;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.afaq-item--open .afaq-num,
+.afaq-item:hover .afaq-num {
+  background: color-mix(in srgb, var(--accent-color) 32%, transparent);
+  border-color: color-mix(in srgb, var(--accent-color) 55%, transparent);
+}
+
+/* Question text */
+.afaq-question-text {
+  flex: 1;
+  font-size: 0.97rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-inverse);
+  transition: color 0.25s ease;
+}
+
+/* Chevron */
+.afaq-chevron {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), color 0.25s ease;
+}
+
+.afaq-item--open .afaq-chevron {
+  transform: rotate(180deg);
+  color: var(--accent-color);
+}
+
+/* ---------- Answer panel ---------- */
+.afaq-answer-wrapper {
+  padding: 0 1.5rem 1.5rem 4.2rem;
+}
+
+.afaq-answer {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.72);
+}
+
+/* ======================================================
+   RESPONSIVE — mobile 375px
+   ====================================================== */
+@media (max-width: 767px) {
+  .afaq-section {
+    padding: 4rem 1.25rem 5rem;
+  }
+
+  .afaq-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .afaq-left {
+    padding-top: 0;
+  }
+
+  .afaq-deco-label {
+    display: none;
+  }
+
+  .afaq-subtitle {
+    max-width: 100%;
+  }
+
+  .afaq-stats {
+    flex-direction: row;
+  }
+
+  .afaq-stat {
+    flex: 1;
+    padding: 0.9rem 1rem;
+  }
+
+  .afaq-stat-divider {
+    width: 1px;
+    height: auto;
+    align-self: stretch;
+  }
+
+  .afaq-stat-number {
+    font-size: 1.5rem;
+  }
+
+  .afaq-answer-wrapper {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+  }
+
+  .afaq-question {
+    padding: 1rem 1.25rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .afaq-inner {
+    grid-template-columns: 300px 1fr;
+    gap: 0 2.5rem;
+  }
+}

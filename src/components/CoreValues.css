@@ -1,0 +1,465 @@
+/* ============================================================
+   CoreValues — Dramatic Cinematic | Neutral + Pattern
+   Full-bleed floating panels, gradient border glow,
+   holographic accents, elastic spring animations
+   ============================================================ */
+
+/* ── Section shell ── */
+.cv-section {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-page);
+  padding: 7rem 0 8rem;
+  isolation: isolate;
+}
+
+/* ── Background: dot grid pattern ── */
+.cv-bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--decorative-color) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  opacity: 0.6;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Background: fine crosshatch grid overlay ── */
+.cv-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--section-divider) 1px, transparent 1px),
+    linear-gradient(90deg, var(--section-divider) 1px, transparent 1px);
+  background-size: 84px 84px;
+  opacity: 0.25;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Cinematic light orbs (decorative) ── */
+.cv-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+  animation: cv-orb-breathe 8s ease-in-out infinite;
+}
+
+.cv-orb-1 {
+  width: 560px;
+  height: 560px;
+  top: -200px;
+  right: -180px;
+  background: radial-gradient(circle, var(--card-glow), transparent 70%);
+  animation-delay: 0s;
+}
+
+.cv-orb-2 {
+  width: 480px;
+  height: 480px;
+  bottom: -160px;
+  left: -140px;
+  background: radial-gradient(circle, var(--shadow-color), transparent 70%);
+  animation-delay: -3s;
+}
+
+.cv-orb-3 {
+  width: 320px;
+  height: 320px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--decorative-color), transparent 70%);
+  animation-delay: -6s;
+}
+
+@keyframes cv-orb-breathe {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.08); }
+}
+
+.cv-orb-3 {
+  animation-name: cv-orb-breathe-center;
+}
+
+@keyframes cv-orb-breathe-center {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.6; transform: translate(-50%, -50%) scale(1.12); }
+}
+
+/* ── Cinematic horizontal accent bars ── */
+.cv-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cv-bar-top {
+  top: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--card-accent-border) 25%,
+    var(--secondary-color) 50%,
+    var(--card-accent-border) 75%,
+    transparent 100%
+  );
+  animation: cv-bar-shimmer 4s ease-in-out infinite;
+}
+
+.cv-bar-bottom {
+  bottom: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--primary-color) 30%,
+    var(--card-accent-border) 60%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+@keyframes cv-bar-shimmer {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+/* ── Content container ── */
+.cv-container {
+  position: relative;
+  z-index: 3;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── Section header ── */
+.cv-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+  animation: cv-fade-up 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Eyebrow label with flanking lines */
+.cv-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.cv-eyebrow-line {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+}
+
+.cv-eyebrow-text {
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+/* Dramatic gradient title */
+.cv-title {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 45%,
+    var(--accent-color) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cv-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── Values grid ── */
+.cv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+/* ── Card wrapper: handles glow frame + entrance animation ── */
+.cv-card-wrapper {
+  position: relative;
+  height: 100%;
+  animation: cv-spring-in 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  opacity: 0;
+}
+
+/* Elastic spring entrance */
+@keyframes cv-spring-in {
+  0%   { opacity: 0; transform: translateY(32px) scale(0.88); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Gradient border glow frame — sits behind the card */
+.cv-card-glow-frame {
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(
+    135deg,
+    var(--card-accent-border),
+    var(--secondary-color),
+    var(--primary-color),
+    var(--card-accent-border)
+  );
+  background-size: 300% 300%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: cv-holo-shift 6s linear infinite;
+}
+
+@keyframes cv-holo-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.cv-card-wrapper:hover .cv-card-glow-frame {
+  opacity: 1;
+}
+
+/* ── Floating card panel ── */
+.cv-card {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  background: var(--bg-surface);
+  border-radius: 20px;
+  padding: 2.25rem 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow:
+    0 4px 16px var(--shadow-color),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+  border: 1px solid var(--border-color);
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease;
+  overflow: hidden;
+}
+
+.cv-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--card-accent-border), transparent);
+  opacity: 0.6;
+}
+
+.cv-card-wrapper:hover .cv-card {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow:
+    0 24px 60px var(--shadow-color),
+    0 4px 16px var(--card-glow),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+}
+
+/* ── Holographic icon badge ── */
+.cv-icon-outer {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Iridescent glow behind icon */
+.cv-icon-holo {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color),
+    var(--accent-color),
+    var(--secondary-color),
+    var(--primary-color)
+  );
+  background-size: 300% 300%;
+  animation: cv-holo-shift 4s linear infinite;
+  filter: blur(10px);
+  opacity: 0.5;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.cv-card-wrapper:hover .cv-icon-holo {
+  opacity: 0.85;
+  filter: blur(14px);
+}
+
+.cv-icon-inner {
+  position: relative;
+  z-index: 1;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+.cv-icon-inner svg {
+  width: 30px;
+  height: 30px;
+  color: var(--text-inverse);
+  stroke-width: 2;
+}
+
+/* ── Card index number (cinematic "01", "02"…) ── */
+.cv-card-index {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--primary-color);
+  opacity: 0.06;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  user-select: none;
+}
+
+.cv-card-wrapper:hover .cv-card-index {
+  opacity: 0.1;
+}
+
+/* ── Value title ── */
+.cv-value-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* ── Value description ── */
+.cv-value-desc {
+  font-size: 0.95rem;
+  line-height: 1.72;
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Card accent line at bottom ── */
+.cv-card-accent-line {
+  margin-top: 1.75rem;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--card-accent-border), transparent);
+  transform-origin: left;
+  transform: scaleX(0.35);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cv-card-wrapper:hover .cv-card-accent-line {
+  transform: scaleX(1);
+}
+
+/* ── Header entrance animation ── */
+@keyframes cv-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .cv-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .cv-section {
+    padding: 5rem 0 6rem;
+  }
+
+  .cv-container {
+    padding: 0 1.25rem;
+  }
+
+  .cv-header {
+    margin-bottom: 3rem;
+  }
+
+  .cv-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .cv-title {
+    font-size: 2rem;
+  }
+
+  .cv-subtitle {
+    font-size: 1rem;
+  }
+
+  .cv-card {
+    padding: 1.75rem 1.5rem 2rem;
+  }
+
+  .cv-card-index {
+    font-size: 3rem;
+  }
+
+  .cv-orb-1 {
+    width: 300px;
+    height: 300px;
+    top: -100px;
+    right: -100px;
+  }
+
+  .cv-orb-2 {
+    width: 260px;
+    height: 260px;
+    bottom: -100px;
+    left: -80px;
+  }
+
+  .cv-orb-3 {
+    display: none;
+  }
+}

@@ -1,0 +1,959 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "timestamp": "2026-02-24T07:51:05.671Z",
+    "description": "Auto-generated schema for editing site content via UI form",
+    "generator": "orchestrator-v7"
+  },
+  "structure": {
+    "pages": {
+      "type": "object",
+      "label": "Pages",
+      "children": {
+        "home": {
+          "type": "page",
+          "label": "Home Page",
+          "path": "site.pages.home",
+          "children": {
+            "pageTitle": {
+              "path": "site.pages.home.seo.title",
+              "type": "text",
+              "label": "Page Title (Browser Tab)"
+            },
+            "metaDescription": {
+              "path": "site.pages.home.seo.metaDescription",
+              "type": "textarea",
+              "label": "Meta Description (Search Results)"
+            },
+            "heroSection": {
+              "type": "object",
+              "label": "Hero Section",
+              "children": {
+                "headline": {
+                  "path": "site.pages.home.sections.heroSection.headline",
+                  "type": "text",
+                  "label": "Headline"
+                },
+                "subheadline": {
+                  "path": "site.pages.home.sections.heroSection.subheadline",
+                  "type": "textarea",
+                  "label": "Subheadline"
+                },
+                "ctaButtonText": {
+                  "path": "site.pages.home.sections.heroSection.ctaButtonText",
+                  "type": "text",
+                  "label": "CTA Button Text"
+                },
+                "ctaButtonUrl": {
+                  "path": "site.pages.home.sections.heroSection.ctaButtonUrl",
+                  "type": "url",
+                  "label": "CTA Button URL"
+                },
+                "secondaryCtaText": {
+                  "path": "site.pages.home.sections.heroSection.secondaryCtaText",
+                  "type": "text",
+                  "label": "Secondary CTA Text"
+                },
+                "secondaryCtaUrl": {
+                  "path": "site.pages.home.sections.heroSection.secondaryCtaUrl",
+                  "type": "url",
+                  "label": "Secondary CTA URL"
+                }
+              },
+              "description": "The main landing section that immediately communicates the value proposition and encourages visitors to start the loan process."
+            },
+            "benefitsGrid": {
+              "type": "object",
+              "label": "Benefits Grid",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.home.sections.benefitsGrid.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "sectionSubtitle": {
+                  "path": "site.pages.home.sections.benefitsGrid.sectionSubtitle",
+                  "type": "textarea",
+                  "label": "Section Subtitle"
+                },
+                "benefits": {
+                  "path": "site.pages.home.sections.benefitsGrid.benefits",
+                  "type": "array",
+                  "label": "Benefits",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "iconName": {
+                        "type": "image",
+                        "label": "Icon Name"
+                      },
+                      "title": {
+                        "type": "text",
+                        "label": "Title"
+                      },
+                      "description": {
+                        "type": "textarea",
+                        "label": "Description"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Displays key benefits of using DriveRight for car financing in an easy-to-scan grid layout."
+            },
+            "howItWorksSteps": {
+              "type": "object",
+              "label": "How It Works Steps",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.home.sections.howItWorksSteps.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "sectionSubtitle": {
+                  "path": "site.pages.home.sections.howItWorksSteps.sectionSubtitle",
+                  "type": "textarea",
+                  "label": "Section Subtitle"
+                },
+                "steps": {
+                  "path": "site.pages.home.sections.howItWorksSteps.steps",
+                  "type": "array",
+                  "label": "Steps",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "stepNumber": {
+                        "type": "text",
+                        "label": "Step Number"
+                      },
+                      "title": {
+                        "type": "text",
+                        "label": "Title"
+                      },
+                      "description": {
+                        "type": "textarea",
+                        "label": "Description"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "A clear step-by-step visual guide showing how the car loan application process works, reducing friction and building confidence."
+            },
+            "loanTypesShowcase": {
+              "type": "object",
+              "label": "Loan Types Showcase",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.home.sections.loanTypesShowcase.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "sectionSubtitle": {
+                  "path": "site.pages.home.sections.loanTypesShowcase.sectionSubtitle",
+                  "type": "textarea",
+                  "label": "Section Subtitle"
+                },
+                "loanTypes": {
+                  "path": "site.pages.home.sections.loanTypesShowcase.loanTypes",
+                  "type": "array",
+                  "label": "Loan Types",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "iconName": {
+                        "type": "image",
+                        "label": "Icon Name"
+                      },
+                      "title": {
+                        "type": "text",
+                        "label": "Title"
+                      },
+                      "description": {
+                        "type": "textarea",
+                        "label": "Description"
+                      },
+                      "ctaText": {
+                        "type": "text",
+                        "label": "CTA Text"
+                      },
+                      "ctaUrl": {
+                        "type": "url",
+                        "label": "CTA URL"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Showcases the different types of car loans available, helping visitors quickly identify which option fits their needs."
+            },
+            "testimonialsCarousel": {
+              "type": "object",
+              "label": "Testimonials Carousel",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.home.sections.testimonialsCarousel.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "sectionSubtitle": {
+                  "path": "site.pages.home.sections.testimonialsCarousel.sectionSubtitle",
+                  "type": "textarea",
+                  "label": "Section Subtitle"
+                },
+                "testimonials": {
+                  "path": "site.pages.home.sections.testimonialsCarousel.testimonials",
+                  "type": "array",
+                  "label": "Testimonials",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "quote": {
+                        "type": "textarea",
+                        "label": "Quote"
+                      },
+                      "authorName": {
+                        "type": "text",
+                        "label": "Author Name"
+                      },
+                      "authorDetail": {
+                        "type": "text",
+                        "label": "Author Detail"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Displays customer testimonials to build social proof and trust with potential borrowers."
+            },
+            "whyChooseUs": {
+              "type": "object",
+              "label": "Why Choose Us",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.home.sections.whyChooseUs.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "description": {
+                  "path": "site.pages.home.sections.whyChooseUs.description",
+                  "type": "textarea",
+                  "label": "Description"
+                },
+                "differentiators": {
+                  "path": "site.pages.home.sections.whyChooseUs.differentiators",
+                  "type": "array",
+                  "label": "Differentiators",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "title": {
+                        "type": "text",
+                        "label": "Title"
+                      },
+                      "description": {
+                        "type": "textarea",
+                        "label": "Description"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "A persuasive section highlighting what differentiates DriveRight from other car loan providers."
+            },
+            "homeCta": {
+              "type": "object",
+              "label": "Home CTA",
+              "children": {
+                "headline": {
+                  "path": "site.pages.home.sections.homeCta.headline",
+                  "type": "text",
+                  "label": "Headline"
+                },
+                "description": {
+                  "path": "site.pages.home.sections.homeCta.description",
+                  "type": "textarea",
+                  "label": "Description"
+                },
+                "ctaButtonText": {
+                  "path": "site.pages.home.sections.homeCta.ctaButtonText",
+                  "type": "text",
+                  "label": "CTA Button Text"
+                },
+                "ctaButtonUrl": {
+                  "path": "site.pages.home.sections.homeCta.ctaButtonUrl",
+                  "type": "url",
+                  "label": "CTA Button URL"
+                }
+              },
+              "description": "A bold call-to-action banner at the bottom of the homepage to capture visitors ready to apply."
+            }
+          }
+        },
+        "about": {
+          "type": "page",
+          "label": "About Page",
+          "path": "site.pages.about",
+          "children": {
+            "pageTitle": {
+              "path": "site.pages.about.seo.title",
+              "type": "text",
+              "label": "Page Title (Browser Tab)"
+            },
+            "metaDescription": {
+              "path": "site.pages.about.seo.metaDescription",
+              "type": "textarea",
+              "label": "Meta Description (Search Results)"
+            },
+            "aboutHero": {
+              "type": "object",
+              "label": "About Hero",
+              "children": {
+                "headline": {
+                  "path": "site.pages.about.sections.aboutHero.headline",
+                  "type": "text",
+                  "label": "Headline"
+                },
+                "subheadline": {
+                  "path": "site.pages.about.sections.aboutHero.subheadline",
+                  "type": "textarea",
+                  "label": "Subheadline"
+                }
+              },
+              "description": "Introduces the About page with a compelling headline about the company's story and purpose."
+            },
+            "missionStatement": {
+              "type": "object",
+              "label": "Mission Statement",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.about.sections.missionStatement.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "missionText": {
+                  "path": "site.pages.about.sections.missionStatement.missionText",
+                  "type": "textarea",
+                  "label": "Mission Text"
+                },
+                "visionText": {
+                  "path": "site.pages.about.sections.missionStatement.visionText",
+                  "type": "textarea",
+                  "label": "Vision Text"
+                }
+              },
+              "description": "Clearly articulates the company's mission and why it exists, building trust with potential customers."
+            },
+            "coreValues": {
+              "type": "object",
+              "label": "Core Values",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.about.sections.coreValues.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "sectionSubtitle": {
+                  "path": "site.pages.about.sections.coreValues.sectionSubtitle",
+                  "type": "textarea",
+                  "label": "Section Subtitle"
+                },
+                "values": {
+                  "path": "site.pages.about.sections.coreValues.values",
+                  "type": "array",
+                  "label": "Values",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "iconName": {
+                        "type": "image",
+                        "label": "Icon Name"
+                      },
+                      "title": {
+                        "type": "text",
+                        "label": "Title"
+                      },
+                      "description": {
+                        "type": "textarea",
+                        "label": "Description"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Highlights the company's core values that guide how they serve car loan customers."
+            },
+            "ourApproach": {
+              "type": "object",
+              "label": "Our Approach",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.about.sections.ourApproach.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "paragraphs": {
+                  "path": "site.pages.about.sections.ourApproach.paragraphs",
+                  "type": "array",
+                  "label": "Paragraphs",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "text": {
+                        "type": "textarea",
+                        "label": "Text"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Explains the company's customer-centric approach to car lending, differentiating from traditional lenders."
+            },
+            "aboutTestimonials": {
+              "type": "object",
+              "label": "About Testimonials",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.about.sections.aboutTestimonials.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "testimonials": {
+                  "path": "site.pages.about.sections.aboutTestimonials.testimonials",
+                  "type": "array",
+                  "label": "Testimonials",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "quote": {
+                        "type": "textarea",
+                        "label": "Quote"
+                      },
+                      "authorName": {
+                        "type": "text",
+                        "label": "Author Name"
+                      },
+                      "authorDetail": {
+                        "type": "text",
+                        "label": "Author Detail"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Social proof on the about page showing customer satisfaction to reinforce credibility."
+            },
+            "aboutCta": {
+              "type": "object",
+              "label": "About CTA",
+              "children": {
+                "headline": {
+                  "path": "site.pages.about.sections.aboutCta.headline",
+                  "type": "text",
+                  "label": "Headline"
+                },
+                "description": {
+                  "path": "site.pages.about.sections.aboutCta.description",
+                  "type": "textarea",
+                  "label": "Description"
+                },
+                "ctaButtonText": {
+                  "path": "site.pages.about.sections.aboutCta.ctaButtonText",
+                  "type": "text",
+                  "label": "CTA Button Text"
+                },
+                "ctaButtonUrl": {
+                  "path": "site.pages.about.sections.aboutCta.ctaButtonUrl",
+                  "type": "url",
+                  "label": "CTA Button URL"
+                }
+              },
+              "description": "Encourages visitors to take the next step after learning about the company."
+            }
+          }
+        },
+        "faq": {
+          "type": "page",
+          "label": "FAQ Page",
+          "path": "site.pages.faq",
+          "children": {
+            "pageTitle": {
+              "path": "site.pages.faq.seo.title",
+              "type": "text",
+              "label": "Page Title (Browser Tab)"
+            },
+            "metaDescription": {
+              "path": "site.pages.faq.seo.metaDescription",
+              "type": "textarea",
+              "label": "Meta Description (Search Results)"
+            },
+            "faqHero": {
+              "type": "object",
+              "label": "FAQ Hero",
+              "children": {
+                "headline": {
+                  "path": "site.pages.faq.sections.faqHero.headline",
+                  "type": "text",
+                  "label": "Headline"
+                },
+                "subheadline": {
+                  "path": "site.pages.faq.sections.faqHero.subheadline",
+                  "type": "textarea",
+                  "label": "Subheadline"
+                }
+              },
+              "description": "Introduces the FAQ page and sets expectations for the kind of information visitors will find."
+            },
+            "faqCategories": {
+              "type": "object",
+              "label": "FAQ Categories",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.faq.sections.faqCategories.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "categories": {
+                  "path": "site.pages.faq.sections.faqCategories.categories",
+                  "type": "array",
+                  "label": "Categories",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "iconName": {
+                        "type": "image",
+                        "label": "Icon Name"
+                      },
+                      "title": {
+                        "type": "text",
+                        "label": "Title"
+                      },
+                      "description": {
+                        "type": "textarea",
+                        "label": "Description"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Quick navigation cards that help visitors jump to the FAQ category most relevant to them."
+            },
+            "generalFaqAccordion": {
+              "type": "object",
+              "label": "General FAQ Accordion",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.faq.sections.generalFaqAccordion.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "faqs": {
+                  "path": "site.pages.faq.sections.generalFaqAccordion.faqs",
+                  "type": "array",
+                  "label": "Faqs",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "question": {
+                        "type": "text",
+                        "label": "Question"
+                      },
+                      "answer": {
+                        "type": "textarea",
+                        "label": "Answer"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Accordion of general car loan FAQs covering basic concepts borrowers need to understand."
+            },
+            "applicationFaqAccordion": {
+              "type": "object",
+              "label": "Application FAQ Accordion",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.faq.sections.applicationFaqAccordion.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "faqs": {
+                  "path": "site.pages.faq.sections.applicationFaqAccordion.faqs",
+                  "type": "array",
+                  "label": "Faqs",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "question": {
+                        "type": "text",
+                        "label": "Question"
+                      },
+                      "answer": {
+                        "type": "textarea",
+                        "label": "Answer"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Accordion of FAQs specifically about the loan application and approval process."
+            },
+            "ratesFaqAccordion": {
+              "type": "object",
+              "label": "Rates FAQ Accordion",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.faq.sections.ratesFaqAccordion.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "faqs": {
+                  "path": "site.pages.faq.sections.ratesFaqAccordion.faqs",
+                  "type": "array",
+                  "label": "Faqs",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "question": {
+                        "type": "text",
+                        "label": "Question"
+                      },
+                      "answer": {
+                        "type": "textarea",
+                        "label": "Answer"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Accordion of FAQs about interest rates, terms, and repayment details."
+            },
+            "faqCta": {
+              "type": "object",
+              "label": "FAQ CTA",
+              "children": {
+                "headline": {
+                  "path": "site.pages.faq.sections.faqCta.headline",
+                  "type": "text",
+                  "label": "Headline"
+                },
+                "description": {
+                  "path": "site.pages.faq.sections.faqCta.description",
+                  "type": "textarea",
+                  "label": "Description"
+                },
+                "ctaButtonText": {
+                  "path": "site.pages.faq.sections.faqCta.ctaButtonText",
+                  "type": "text",
+                  "label": "CTA Button Text"
+                },
+                "ctaButtonUrl": {
+                  "path": "site.pages.faq.sections.faqCta.ctaButtonUrl",
+                  "type": "url",
+                  "label": "CTA Button URL"
+                }
+              },
+              "description": "Encourages visitors who still have questions to reach out directly via the contact page."
+            }
+          }
+        },
+        "contact": {
+          "type": "page",
+          "label": "Contact Page",
+          "path": "site.pages.contact",
+          "children": {
+            "pageTitle": {
+              "path": "site.pages.contact.seo.title",
+              "type": "text",
+              "label": "Page Title (Browser Tab)"
+            },
+            "metaDescription": {
+              "path": "site.pages.contact.seo.metaDescription",
+              "type": "textarea",
+              "label": "Meta Description (Search Results)"
+            },
+            "contactHero": {
+              "type": "object",
+              "label": "Contact Hero",
+              "children": {
+                "headline": {
+                  "path": "site.pages.contact.sections.contactHero.headline",
+                  "type": "text",
+                  "label": "Headline"
+                },
+                "subheadline": {
+                  "path": "site.pages.contact.sections.contactHero.subheadline",
+                  "type": "textarea",
+                  "label": "Subheadline"
+                }
+              },
+              "description": "Introduces the contact page with a welcoming message that encourages visitors to reach out."
+            },
+            "contactForm": {
+              "type": "object",
+              "label": "Contact Form",
+              "children": {
+                "formTitle": {
+                  "path": "site.pages.contact.sections.contactForm.formTitle",
+                  "type": "text",
+                  "label": "Form Title"
+                },
+                "formDescription": {
+                  "path": "site.pages.contact.sections.contactForm.formDescription",
+                  "type": "textarea",
+                  "label": "Form Description"
+                },
+                "fields": {
+                  "path": "site.pages.contact.sections.contactForm.fields",
+                  "type": "array",
+                  "label": "Fields",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "fieldName": {
+                        "type": "text",
+                        "label": "Field Name"
+                      },
+                      "label": {
+                        "type": "text",
+                        "label": "Label"
+                      },
+                      "type": {
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      "placeholder": {
+                        "type": "text",
+                        "label": "Placeholder"
+                      },
+                      "isRequired": {
+                        "type": "toggle",
+                        "label": "Is Required"
+                      }
+                    }
+                  }
+                },
+                "submitButtonText": {
+                  "path": "site.pages.contact.sections.contactForm.submitButtonText",
+                  "type": "text",
+                  "label": "Submit Button Text"
+                },
+                "successMessage": {
+                  "path": "site.pages.contact.sections.contactForm.successMessage",
+                  "type": "textarea",
+                  "label": "Success Message"
+                }
+              },
+              "description": "The primary contact form where potential borrowers can submit their information and inquiry."
+            },
+            "contactExpectations": {
+              "type": "object",
+              "label": "Contact Expectations",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.contact.sections.contactExpectations.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "steps": {
+                  "path": "site.pages.contact.sections.contactExpectations.steps",
+                  "type": "array",
+                  "label": "Steps",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "iconName": {
+                        "type": "image",
+                        "label": "Icon Name"
+                      },
+                      "title": {
+                        "type": "text",
+                        "label": "Title"
+                      },
+                      "description": {
+                        "type": "textarea",
+                        "label": "Description"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Sets clear expectations for what happens after a visitor submits the contact form."
+            },
+            "contactFaqPreview": {
+              "type": "object",
+              "label": "Contact FAQ Preview",
+              "children": {
+                "sectionTitle": {
+                  "path": "site.pages.contact.sections.contactFaqPreview.sectionTitle",
+                  "type": "text",
+                  "label": "Section Title"
+                },
+                "sectionSubtitle": {
+                  "path": "site.pages.contact.sections.contactFaqPreview.sectionSubtitle",
+                  "type": "textarea",
+                  "label": "Section Subtitle"
+                },
+                "faqs": {
+                  "path": "site.pages.contact.sections.contactFaqPreview.faqs",
+                  "type": "array",
+                  "label": "Faqs",
+                  "itemSchema": {
+                    "type": "object",
+                    "children": {
+                      "question": {
+                        "type": "text",
+                        "label": "Question"
+                      },
+                      "answer": {
+                        "type": "textarea",
+                        "label": "Answer"
+                      }
+                    }
+                  }
+                },
+                "viewAllText": {
+                  "path": "site.pages.contact.sections.contactFaqPreview.viewAllText",
+                  "type": "text",
+                  "label": "View All Text"
+                },
+                "viewAllUrl": {
+                  "path": "site.pages.contact.sections.contactFaqPreview.viewAllUrl",
+                  "type": "url",
+                  "label": "View All URL"
+                }
+              },
+              "description": "Shows a few common questions to help visitors who may not need to contact directly."
+            },
+            "contactCta": {
+              "type": "object",
+              "label": "Contact CTA",
+              "children": {
+                "headline": {
+                  "path": "site.pages.contact.sections.contactCta.headline",
+                  "type": "text",
+                  "label": "Headline"
+                },
+                "description": {
+                  "path": "site.pages.contact.sections.contactCta.description",
+                  "type": "textarea",
+                  "label": "Description"
+                },
+                "ctaButtonText": {
+                  "path": "site.pages.contact.sections.contactCta.ctaButtonText",
+                  "type": "text",
+                  "label": "CTA Button Text"
+                },
+                "ctaButtonUrl": {
+                  "path": "site.pages.contact.sections.contactCta.ctaButtonUrl",
+                  "type": "url",
+                  "label": "CTA Button URL"
+                }
+              },
+              "description": "A reassuring closing section that reinforces the value of reaching out."
+            }
+          }
+        }
+      }
+    },
+    "header": {
+      "type": "object",
+      "label": "Header & Navigation",
+      "path": "site.global.navigation",
+      "children": {
+        "items": {
+          "path": "site.global.navigation.items",
+          "type": "array",
+          "label": "Navigation Items",
+          "itemSchema": {
+            "type": "object",
+            "children": {
+              "label": {
+                "type": "text",
+                "label": "Label"
+              },
+              "url": {
+                "type": "url",
+                "label": "URL"
+              },
+              "type": {
+                "type": "select",
+                "label": "Type",
+                "options": [
+                  "link",
+                  "cta"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "footer": {
+      "type": "object",
+      "label": "Footer",
+      "path": "site.global.footer",
+      "children": {
+        "name": {
+          "path": "site.global.footer.branding.name",
+          "type": "text",
+          "label": "Footer Brand Name"
+        },
+        "description": {
+          "path": "site.global.footer.branding.description",
+          "type": "textarea",
+          "label": "Footer Description"
+        },
+        "copyright": {
+          "path": "site.global.footer.copyright",
+          "type": "text",
+          "label": "Copyright Text"
+        },
+        "links": {
+          "path": "site.global.footer.links",
+          "type": "array",
+          "label": "Footer Links",
+          "itemSchema": {
+            "type": "object",
+            "children": {
+              "label": {
+                "type": "text",
+                "label": "Label"
+              },
+              "url": {
+                "type": "url",
+                "label": "URL"
+              }
+            }
+          }
+        }
+      }
+    },
+    "branding": {
+      "type": "object",
+      "label": "Branding & SEO",
+      "children": {
+        "name": {
+          "path": "site.global.branding.name",
+          "type": "text",
+          "label": "Brand Name"
+        },
+        "tagline": {
+          "path": "site.global.branding.tagline",
+          "type": "text",
+          "label": "Tagline"
+        },
+        "defaultTitle": {
+          "path": "site.global.seo.defaultTitle",
+          "type": "text",
+          "label": "Default SEO Title"
+        },
+        "defaultDescription": {
+          "path": "site.global.seo.defaultDescription",
+          "type": "textarea",
+          "label": "Default Meta Description"
+        }
+      }
+    }
+  }
+}

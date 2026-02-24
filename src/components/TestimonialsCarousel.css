@@ -1,0 +1,446 @@
+/* ============================================================
+   TestimonialsCarousel — bright & optimistic, full-bleed,
+   floating panels, gradient text, morphing shapes, aurora bg
+   ============================================================ */
+
+/* ---------- Section background ---------- */
+.tc-section {
+  position: relative;
+  padding: 7rem 0 8rem;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 15%, var(--card-glow) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 90% 85%, var(--decorative-color) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 10%, var(--card-glow) 0%, transparent 70%),
+    linear-gradient(170deg, var(--bg-surface) 0%, var(--bg-page) 55%, var(--bg-surface) 100%);
+}
+
+/* ---------- Morphing blobs ---------- */
+.tc-blob {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.tc-blob-1 {
+  width: 520px;
+  height: 520px;
+  top: -140px;
+  left: -160px;
+  background: radial-gradient(circle, var(--card-glow), transparent 70%);
+  animation: tcMorph1 14s ease-in-out infinite, tcFloatY 18s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.tc-blob-2 {
+  width: 380px;
+  height: 380px;
+  bottom: -80px;
+  right: -80px;
+  background: radial-gradient(circle, var(--decorative-color), transparent 70%);
+  animation: tcMorph2 11s ease-in-out infinite, tcFloatY 14s ease-in-out infinite reverse;
+  opacity: 0.9;
+}
+
+.tc-blob-3 {
+  width: 260px;
+  height: 260px;
+  top: 40%;
+  right: 12%;
+  background: radial-gradient(circle, var(--card-glow), transparent 70%);
+  animation: tcMorph3 9s ease-in-out infinite, tcFloatY 11s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes tcMorph1 {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  33%  { border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%; }
+  66%  { border-radius: 70% 30% 50% 50% / 30% 50% 70% 50%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+@keyframes tcMorph2 {
+  0%   { border-radius: 30% 70% 60% 40% / 50% 40% 60% 50%; }
+  33%  { border-radius: 70% 30% 40% 60% / 60% 50% 40% 70%; }
+  66%  { border-radius: 50% 50% 70% 30% / 40% 60% 50% 60%; }
+  100% { border-radius: 30% 70% 60% 40% / 50% 40% 60% 50%; }
+}
+
+@keyframes tcMorph3 {
+  0%   { border-radius: 50% 50% 40% 60% / 40% 60% 40% 60%; }
+  50%  { border-radius: 60% 40% 60% 40% / 60% 40% 60% 40%; }
+  100% { border-radius: 50% 50% 40% 60% / 40% 60% 40% 60%; }
+}
+
+@keyframes tcFloatY {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-24px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ---------- Dot grid texture ---------- */
+.tc-dot-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.45;
+}
+
+/* ---------- Container ---------- */
+.tc-container {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- Header ---------- */
+.tc-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 4.5rem;
+  animation: tcFadeUp 0.8s ease both;
+}
+
+.tc-oversize-deco {
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18rem;
+  line-height: 1;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 900;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.tc-title {
+  position: relative;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tc-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ---------- Carousel wrapper ---------- */
+.tc-carousel-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  animation: tcFadeUp 0.9s ease 0.15s both;
+}
+
+/* ---------- Panel track ---------- */
+.tc-panel-track {
+  flex: 1;
+  min-height: 340px;
+  position: relative;
+}
+
+/* ---------- Floating testimonial panel ---------- */
+.tc-panel {
+  position: relative;
+  background: var(--bg-surface);
+  border-radius: 24px;
+  padding: 3rem 3.5rem 2.5rem;
+  box-shadow:
+    0 4px 24px var(--shadow-color),
+    0 20px 60px var(--shadow-color),
+    0 0 0 1px var(--border-color),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  overflow: hidden;
+}
+
+/* Accent top bar */
+.tc-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-accent);
+  border-radius: 24px 24px 0 0;
+}
+
+/* Floating feel — subtle inner glow */
+.tc-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.6), transparent 60%);
+  pointer-events: none;
+}
+
+/* Panel entrance — next direction */
+.tc-panel--next {
+  animation: tcSlideInNext 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Panel entrance — prev direction */
+.tc-panel--prev {
+  animation: tcSlideInPrev 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes tcSlideInNext {
+  from { opacity: 0; transform: translateX(48px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes tcSlideInPrev {
+  from { opacity: 0; transform: translateX(-48px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* ---------- Oversized decorative quote inside panel ---------- */
+.tc-panel-quote-deco {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 9rem;
+  line-height: 1;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 900;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.12;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- Stars ---------- */
+.tc-stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1.4rem;
+}
+
+.tc-star {
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  filter: drop-shadow(0 1px 2px var(--card-glow));
+}
+
+/* ---------- Quote text ---------- */
+.tc-quote {
+  font-size: 1.13rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 2rem;
+  font-style: italic;
+  border: none;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Author row ---------- */
+.tc-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tc-author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  color: var(--text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: var(--font-heading, sans-serif);
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px var(--card-glow);
+}
+
+.tc-author-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.tc-author-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.tc-author-detail {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* ---------- Navigation buttons ---------- */
+.tc-nav-btn {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+.tc-nav-btn:hover {
+  background: var(--gradient-accent);
+  border-color: transparent;
+  color: var(--text-inverse);
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px var(--card-glow);
+}
+
+.tc-nav-btn:active {
+  transform: scale(0.96);
+}
+
+/* ---------- Dot indicators ---------- */
+.tc-dots {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 2.2rem;
+  animation: tcFadeUp 0.9s ease 0.25s both;
+}
+
+.tc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--border-color);
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.tc-dot--active {
+  width: 28px;
+  border-radius: 4px;
+  background: var(--gradient-accent);
+}
+
+.tc-dot:hover:not(.tc-dot--active) {
+  background: var(--text-secondary);
+  transform: scale(1.2);
+}
+
+/* ---------- Counter ---------- */
+.tc-counter {
+  margin-top: 1.2rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  animation: tcFadeUp 0.9s ease 0.3s both;
+}
+
+.tc-counter-current {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.tc-counter-sep {
+  color: var(--border-color);
+  margin: 0 0.1rem;
+}
+
+.tc-counter-total {
+  color: var(--text-secondary);
+}
+
+/* ---------- Entrance animation ---------- */
+@keyframes tcFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsive — mobile ---------- */
+@media (max-width: 640px) {
+  .tc-section {
+    padding: 5rem 0 6rem;
+  }
+
+  .tc-container {
+    padding: 0 1.25rem;
+  }
+
+  .tc-carousel-wrapper {
+    gap: 0.75rem;
+  }
+
+  .tc-panel {
+    padding: 2rem 1.75rem 1.75rem;
+  }
+
+  .tc-panel-quote-deco {
+    font-size: 6rem;
+  }
+
+  .tc-nav-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .tc-nav-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .tc-quote {
+    font-size: 1rem;
+  }
+
+  .tc-oversize-deco {
+    font-size: 10rem;
+    opacity: 0.05;
+  }
+
+  .tc-title {
+    font-size: 2rem;
+  }
+
+  .tc-blob-1 { width: 300px; height: 300px; }
+  .tc-blob-2 { width: 220px; height: 220px; }
+  .tc-blob-3 { display: none; }
+}

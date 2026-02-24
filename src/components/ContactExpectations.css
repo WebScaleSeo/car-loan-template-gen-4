@@ -1,0 +1,432 @@
+/* =============================================================
+   ContactExpectations — Cinematic Neutral + Pattern
+   Mood: Dramatic | Spatial: Grid-breaking overlap
+   Effects: Gradient border glow + split-tone | Motion: Scramble decode
+   ============================================================= */
+
+.ce-section {
+  position: relative;
+  padding: 7rem 0 10rem;
+  background-color: var(--bg-page);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---- Background: Repeating dot grid pattern ---- */
+.ce-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, var(--decorative-color) 1.5px, transparent 1.5px);
+  background-size: 30px 30px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---- Noise / grain texture overlay ---- */
+.ce-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---- Split-tone cinematic glows ---- */
+.ce-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ce-glow--left {
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, var(--secondary-color), transparent 70%);
+  top: -80px;
+  left: -180px;
+  opacity: 0.1;
+}
+
+.ce-glow--right {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, var(--accent-color), transparent 70%);
+  bottom: -60px;
+  right: -160px;
+  opacity: 0.09;
+}
+
+/* ---- Grid-breaking decorative word ---- */
+.ce-decor-word {
+  position: absolute;
+  right: -2rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 9rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--decorative-color);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ---- Container ---- */
+.ce-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ---- Section Header ---- */
+.ce-header {
+  text-align: center;
+  margin-bottom: 5rem;
+  animation: ce-fadeUp 0.9s ease both;
+}
+
+.ce-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ce-eyebrow-line {
+  display: block;
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--card-accent-border));
+}
+
+.ce-eyebrow-line:last-child {
+  background: linear-gradient(90deg, var(--card-accent-border), transparent);
+}
+
+.ce-eyebrow-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--card-accent-border);
+}
+
+.ce-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  /* Split-tone treatment: gradient clip on text */
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 50%,
+    var(--accent-color) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+}
+
+.ce-title-underline {
+  width: 80px;
+  height: 3px;
+  background: var(--gradient-accent);
+  margin: 1.25rem auto 0;
+  border-radius: 2px;
+  animation: ce-growWidth 0.8s ease 0.4s both;
+}
+
+/* ---- Steps Grid with offset overlap ---- */
+.ce-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 2.5rem;
+  align-items: start;
+}
+
+/* Even cards offset downward to create grid-breaking overlap */
+.ce-step--offset {
+  margin-top: 3rem;
+}
+
+/* Individual step wrapper — handles entrance animation */
+.ce-step {
+  position: relative;
+  opacity: 0;
+  animation: ce-fadeUp 0.7s ease forwards;
+}
+
+/* ---- Gradient border glow ring (behind card) ---- */
+.ce-step-glow-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 19px;
+  background: linear-gradient(135deg, var(--secondary-color), var(--card-accent-border));
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: blur(2px);
+}
+
+.ce-step:hover .ce-step-glow-ring {
+  opacity: 0.7;
+}
+
+/* ---- Card ---- */
+.ce-step-card {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-surface);
+  border-radius: 16px;
+  padding: 2.5rem 2rem 2rem;
+  overflow: hidden;
+  height: 100%;
+  border: 1px solid var(--border-color);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  box-shadow: 0 4px 24px var(--shadow-color);
+}
+
+.ce-step:hover .ce-step-card {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 48px var(--shadow-color);
+  border-color: transparent;
+}
+
+/* Animated gradient top accent bar */
+.ce-step-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--card-accent-border));
+  border-radius: 16px 16px 0 0;
+  transform-origin: left center;
+  animation: ce-growBar 0.6s ease both;
+}
+
+.ce-step:nth-child(1) .ce-step-topbar { animation-delay: 0.35s; }
+.ce-step:nth-child(2) .ce-step-topbar { animation-delay: 0.53s; }
+.ce-step:nth-child(3) .ce-step-topbar { animation-delay: 0.71s; }
+.ce-step:nth-child(4) .ce-step-topbar { animation-delay: 0.89s; }
+
+/* Oversized decorative step number — stroke outline for clear visibility + editorial look */
+.ce-step-num {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  /* Stroke/outline typography: clearly visible outline, no fill competing with content */
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text-secondary);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---- Icon badge ---- */
+.ce-step-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: var(--text-inverse);
+  box-shadow: 0 8px 20px var(--shadow-color);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ce-step:hover .ce-step-icon {
+  transform: scale(1.08);
+  box-shadow: 0 12px 28px var(--card-glow);
+}
+
+.ce-step-icon svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* ---- Step content ---- */
+.ce-step-body {
+  position: relative;
+  z-index: 1;
+}
+
+.ce-step-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+}
+
+.ce-step-desc {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.ce-step-label {
+  display: inline-block;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--badge-text);
+  background: var(--badge-bg);
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  margin-top: 0.5rem;
+}
+
+.ce-step-value {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-top: 0.5rem;
+}
+
+.ce-step-quote {
+  font-style: italic;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--card-accent-border);
+  padding-left: 1rem;
+  margin: 0.75rem 0 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* ---- Connector dots ---- */
+.ce-step-connector {
+  display: flex;
+  gap: 4px;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.ce-connector-dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--card-accent-border);
+  opacity: 0.5;
+}
+
+.ce-connector-dot:first-child { opacity: 0.9; }
+.ce-connector-dot:nth-child(2) { opacity: 0.55; }
+.ce-connector-dot:last-child { opacity: 0.25; }
+
+/* ---- Keyframes ---- */
+@keyframes ce-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ce-growWidth {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes ce-growBar {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Pulsing glow on the section background glows — decorative only */
+@keyframes ce-pulseSlow {
+  0%, 100% { opacity: 0.09; transform: scale(1); }
+  50%       { opacity: 0.14; transform: scale(1.05); }
+}
+
+.ce-glow--left  { animation: ce-pulseSlow 8s ease-in-out infinite; }
+.ce-glow--right { animation: ce-pulseSlow 10s ease-in-out infinite 2s; }
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .ce-decor-word {
+    font-size: 6rem;
+    right: -1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ce-section {
+    padding: 4.5rem 0 6rem;
+  }
+
+  .ce-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .ce-step--offset {
+    margin-top: 0;
+  }
+
+  .ce-decor-word {
+    font-size: 4.5rem;
+    opacity: 0.5;
+  }
+
+  .ce-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+
+  .ce-step-num {
+    font-size: 4.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ce-container {
+    padding: 0 1.25rem;
+  }
+
+  .ce-step-card {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .ce-header {
+    margin-bottom: 3rem;
+  }
+}

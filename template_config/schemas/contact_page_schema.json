@@ -1,0 +1,253 @@
+{
+  "name": "generate_contact_page",
+  "description": "Generate complete contact page content",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "seo": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 60
+          },
+          "metaDescription": {
+            "type": "string",
+            "minLength": 50,
+            "maxLength": 160
+          }
+        },
+        "required": [
+          "title",
+          "metaDescription"
+        ]
+      },
+      "componentOrder": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "contactHero",
+            "contactForm",
+            "contactExpectations",
+            "contactFaqPreview",
+            "contactCta"
+          ]
+        },
+        "minItems": 5,
+        "maxItems": 5
+      },
+      "sections": {
+        "type": "object",
+        "properties": {
+          "contactHero": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "Contact page headline"
+              },
+              "subheadline": {
+                "type": "string",
+                "description": "1-2 sentence description encouraging contact"
+              }
+            },
+            "required": [
+              "headline",
+              "subheadline"
+            ]
+          },
+          "contactForm": {
+            "type": "object",
+            "properties": {
+              "formTitle": {
+                "type": "string",
+                "description": "Form heading, e.g. Send Us a Message"
+              },
+              "formDescription": {
+                "type": "string",
+                "description": "Brief instruction text above the form"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "fieldName": {
+                      "type": "string",
+                      "description": "Technical field name, e.g. fullName"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Display label for the field"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Input type: text, email, tel, textarea, select"
+                    },
+                    "placeholder": {
+                      "type": "string",
+                      "description": "Placeholder text"
+                    },
+                    "isRequired": {
+                      "type": "boolean",
+                      "description": "Whether the field is required"
+                    }
+                  },
+                  "required": [
+                    "fieldName",
+                    "label",
+                    "type",
+                    "placeholder",
+                    "isRequired"
+                  ]
+                }
+              },
+              "submitButtonText": {
+                "type": "string",
+                "description": "Submit button label"
+              },
+              "successMessage": {
+                "type": "string",
+                "description": "Message shown after successful submission"
+              }
+            },
+            "required": [
+              "formTitle",
+              "formDescription",
+              "fields",
+              "submitButtonText",
+              "successMessage"
+            ]
+          },
+          "contactExpectations": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading like What Happens Next"
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "iconName": {
+                      "type": "string",
+                      "description": "Icon identifier for the step"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Short step title"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "1-2 sentence description"
+                    }
+                  },
+                  "required": [
+                    "iconName",
+                    "title",
+                    "description"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "steps"
+            ]
+          },
+          "contactFaqPreview": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading like Quick Answers"
+              },
+              "sectionSubtitle": {
+                "type": "string",
+                "description": "Brief description"
+              },
+              "faqs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "question": {
+                      "type": "string",
+                      "description": "The FAQ question"
+                    },
+                    "answer": {
+                      "type": "string",
+                      "description": "A brief answer, 1-2 sentences"
+                    }
+                  },
+                  "required": [
+                    "question",
+                    "answer"
+                  ]
+                }
+              },
+              "viewAllText": {
+                "type": "string",
+                "description": "Link text to full FAQ page"
+              },
+              "viewAllUrl": {
+                "type": "string",
+                "description": "URL — must be /faq"
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "sectionSubtitle",
+              "faqs",
+              "viewAllText",
+              "viewAllUrl"
+            ]
+          },
+          "contactCta": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "Encouraging closing headline"
+              },
+              "description": {
+                "type": "string",
+                "description": "1-2 sentence reassuring message"
+              },
+              "ctaButtonText": {
+                "type": "string",
+                "description": "CTA button label pointing back to top of form"
+              },
+              "ctaButtonUrl": {
+                "type": "string",
+                "description": "URL — must be /contact"
+              }
+            },
+            "required": [
+              "headline",
+              "description",
+              "ctaButtonText",
+              "ctaButtonUrl"
+            ]
+          }
+        },
+        "required": [
+          "contactHero",
+          "contactForm",
+          "contactExpectations",
+          "contactFaqPreview",
+          "contactCta"
+        ]
+      }
+    },
+    "required": [
+      "seo",
+      "componentOrder",
+      "sections"
+    ]
+  }
+}

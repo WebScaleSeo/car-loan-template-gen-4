@@ -1,0 +1,237 @@
+{
+  "name": "generate_about_page",
+  "description": "Generate complete about page content",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "seo": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 60
+          },
+          "metaDescription": {
+            "type": "string",
+            "minLength": 50,
+            "maxLength": 160
+          }
+        },
+        "required": [
+          "title",
+          "metaDescription"
+        ]
+      },
+      "componentOrder": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "aboutHero",
+            "missionStatement",
+            "coreValues",
+            "ourApproach",
+            "aboutTestimonials",
+            "aboutCta"
+          ]
+        },
+        "minItems": 6,
+        "maxItems": 6
+      },
+      "sections": {
+        "type": "object",
+        "properties": {
+          "aboutHero": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "About page hero headline"
+              },
+              "subheadline": {
+                "type": "string",
+                "description": "1-2 sentence supporting description"
+              }
+            },
+            "required": [
+              "headline",
+              "subheadline"
+            ]
+          },
+          "missionStatement": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading like Our Mission"
+              },
+              "missionText": {
+                "type": "string",
+                "description": "3-4 sentence mission statement paragraph"
+              },
+              "visionText": {
+                "type": "string",
+                "description": "2-3 sentence vision statement paragraph"
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "missionText",
+              "visionText"
+            ]
+          },
+          "coreValues": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading for the values section"
+              },
+              "sectionSubtitle": {
+                "type": "string",
+                "description": "Brief intro to the values"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "iconName": {
+                      "type": "string",
+                      "description": "Icon identifier for the value"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Value name, e.g. Transparency"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "1-2 sentence explanation of the value"
+                    }
+                  },
+                  "required": [
+                    "iconName",
+                    "title",
+                    "description"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "sectionSubtitle",
+              "values"
+            ]
+          },
+          "ourApproach": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading for the approach section"
+              },
+              "paragraphs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "A paragraph of text about the company's approach, 2-3 sentences"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "paragraphs"
+            ]
+          },
+          "aboutTestimonials": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading for testimonials"
+              },
+              "testimonials": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string",
+                      "description": "Customer testimonial, 2-3 sentences"
+                    },
+                    "authorName": {
+                      "type": "string",
+                      "description": "First name and last initial"
+                    },
+                    "authorDetail": {
+                      "type": "string",
+                      "description": "Brief context"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "authorName",
+                    "authorDetail"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "testimonials"
+            ]
+          },
+          "aboutCta": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "CTA headline"
+              },
+              "description": {
+                "type": "string",
+                "description": "1-2 sentence supporting text"
+              },
+              "ctaButtonText": {
+                "type": "string",
+                "description": "CTA button label"
+              },
+              "ctaButtonUrl": {
+                "type": "string",
+                "description": "URL — must be /contact"
+              }
+            },
+            "required": [
+              "headline",
+              "description",
+              "ctaButtonText",
+              "ctaButtonUrl"
+            ]
+          }
+        },
+        "required": [
+          "aboutHero",
+          "missionStatement",
+          "coreValues",
+          "ourApproach",
+          "aboutTestimonials",
+          "aboutCta"
+        ]
+      }
+    },
+    "required": [
+      "seo",
+      "componentOrder",
+      "sections"
+    ]
+  }
+}
