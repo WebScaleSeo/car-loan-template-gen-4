@@ -1,0 +1,12 @@
+node_modules
+package-lock.json
+dist
+.astro
+.git
+.github
+*.md
+.DS_Store
+.cursor
+.playwright
+dokployConfig.json
+nixpacks.toml
